@@ -49,8 +49,7 @@ export async function onRequest({ request }: { request: Request }): Promise<Resp
     // Preserve upstream ranking, units, nulls, attribution fields and snapshot date.
     // Rebuild headers: never forward Set-Cookie, CORS or upstream session headers.
     return json(payload);
-  } catch (error) {
-    const detail = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
-    return json({ error: "Rankings source unavailable", detail }, 502);
+  } catch {
+    return json({ error: "Rankings source unavailable" }, 502);
   }
 }
