@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["snapshotDate", "vendors"],
+  "properties": {
+    "snapshotDate": {
+      "type": "string",
+      "format": "timestamp"
+    },
+    "vendors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "sources"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "upstreamCreators": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "sources": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "url", "checkedAt", "httpStatus"],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": ["api_pricing", "subscription_plan", "model_doc"]
+                },
+                "url": {
+                  "type": "string",
+                  "pattern": "^https://"
+                },
+                "label": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "lang": {
+                  "type": "string",
+                  "enum": ["zh", "en"]
+                },
+                "checkedAt": {
+                  "type": "string",
+                  "format": "timestamp"
+                },
+                "httpStatus": {
+                  "type": "integer",
+                  "minimum": 200,
+                  "maximum": 399
+                },
+                "contentSha256": {
+                  "type": ["string", "null"],
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "rendered": {
+                  "type": "boolean"
+                },
+                "primary": {
+                  "type": "boolean"
+                },
+                "prices": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["item", "value", "unit", "quote"],
+                    "properties": {
+                      "item": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "model": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "value": {
+                        "type": "number"
+                      },
+                      "unit": {
+                        "type": "string",
+                        "pattern": "^[A-Z0-9_]+$"
+                      },
+                      "quote": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 600
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

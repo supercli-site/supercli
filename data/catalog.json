@@ -1212,7 +1212,7 @@
     "category": "ai",
     "repo": "webkubor/claude-usage-statusline",
     "description": "Claude Code 终端状态栏，实时监控会话花费、上下文 Token 占用与限额预警。",
-    "install": "git clone https://github.com/webkubor/claude-usage-statusline ~/.claude/skills/claude-usage-statusline",
+    "install": "git clone git@github.com:webkubor/claude-usage-statusline ~/.claude/skills/claude-usage-statusline",
     "docs": "https://github.com/webkubor/claude-usage-statusline#readme",
     "icon": "claude-usage-statusline.png",
     "maintainerType": "community"

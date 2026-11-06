@@ -88,7 +88,7 @@ Details are in [CONTRIBUTING.md](CONTRIBUTING.md) and the [public inclusion stan
 Requires Node 24+ and pnpm 12.4.
 
 ```sh
-git clone https://github.com/webkubor/supercli.git
+git clone git@github.com:webkubor/supercli.git
 cd supercli
 pnpm install --frozen-lockfile
 pnpm dev

@@ -9,7 +9,7 @@ const paths = [...read("sitemap.xml").matchAll(/<loc>([^<]+)<\/loc>/g)].map(
 );
 assert.equal(
   paths.length,
-  (snapshot.tools.length + snapshot.guides.length + 3) * 2,
+  (snapshot.tools.length + snapshot.guides.length + 4) * 2,
 );
 for (const url of paths) {
   const file =

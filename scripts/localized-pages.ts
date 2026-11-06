@@ -26,12 +26,15 @@ export const pagePaths = [
   "/",
   "/standards",
   "/brand",
+  "/models",
   ...guides.map((guide) => `/guides/${guide.slug}/`),
   ...catalog.map((item) => `/tools/${item.id}/`),
 ];
 /** 添加语言前缀。 */
 export function localizedPath(path: string, language: Language): string {
-  const clean = path.replace(/^(\/(?:brand|standards))\.html(?=[?#]|$)/, "$1");
+  const clean = path
+    .replace(/^(\/(?:brand|standards))\.html(?=[?#]|$)/, "$1")
+    .replace(/^\/models\/$/, "/models");
   return language === "en" ? `/en${clean}` : clean;
 }
 /** 将发布路径映射到静态入口。 */
@@ -41,6 +44,8 @@ export function pageSource(path: string): string | null {
   if (path === "/standards" || path === "/standards.html")
     return "standards.html";
   if (path === "/brand.html" || path === "/brand") return "brand.html";
+  if (path === "/models" || path === "/models.html" || path === "/models/")
+    return "models.html";
   return catalog.some((item) => path === `/tools/${item.id}/`)
     ? "guides.html"
     : null;

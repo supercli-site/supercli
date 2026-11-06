@@ -1,6 +1,7 @@
 /** 构建与同步共用数据契约；目录校验不读取旧指标或要求图标已存在。 */
 import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
+import { validatePricingSources } from "./pricing-validation.mjs";
 import Ajv from "ajv";
 const schema = (name) =>
   JSON.parse(
@@ -15,6 +16,10 @@ const catalogSchema = ajv.compile(schema("catalog"));
 const metricsSchema = ajv.compile(schema("metrics"));
 const recommendationsSchema = ajv.compile(schema("recommendations"));
 const contributorsSchema = ajv.compile(schema("contributors"));
+export function validatePricingSourcesRegistry(registry) {
+  validatePricingSources(registry);
+}
+
 export function validateCatalog(catalog) {
   assert(catalogSchema(catalog), JSON.stringify(catalogSchema.errors));
   for (const field of ["id", "repo"]) {

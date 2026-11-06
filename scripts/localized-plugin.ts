@@ -74,16 +74,21 @@ export function localizedPages(): Plugin {
         source: llmsIndex(),
       });
       const templates = Object.fromEntries(
-        ["index.html", "standards.html", "brand.html", "guides.html"].map(
-          (name) => {
-            const asset = bundle[name];
-            if (!asset || asset.type !== "asset")
-              throw new Error(`Missing built template: ${name}`);
-            return [name, String(asset.source)];
-          },
-        ),
+        [
+          "index.html",
+          "standards.html",
+          "brand.html",
+          "guides.html",
+          "models.html",
+        ].map((name) => {
+          const asset = bundle[name];
+          if (!asset || asset.type !== "asset")
+            throw new Error(`Missing built template: ${name}`);
+          return [name, String(asset.source)];
+        }),
       );
       delete bundle["guides.html"];
+      delete bundle["models.html"];
       for (const path of pagePaths)
         for (const language of ["zh", "en"] as const) {
           const source = pageSource(path)!;

@@ -88,7 +88,7 @@ SuperCLI 的做法是**人工收录 + 公开依据**：
 需要 Node 24+ 与 pnpm 12.4。
 
 ```sh
-git clone https://github.com/webkubor/supercli.git
+git clone git@github.com:webkubor/supercli.git
 cd supercli
 pnpm install --frozen-lockfile
 pnpm dev

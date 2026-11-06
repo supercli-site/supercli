@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Agent 模型排行榜：按 ModelGo Agentic Index 排序的模型快照，含单任务成本、输出吞吐与发布日期，每日快照转发自 ModelGo 公开接口。"
+    />
+    <meta name="theme-color" content="#002fa7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)" />
+    <script>
+      (() => {
+        try {
+          const saved = localStorage.getItem("supercli-theme");
+          if (saved === "light" || saved === "dark")
+            document.documentElement.dataset.theme = saved;
+        } catch {}
+      })();
+    </script>
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:site_name" content="SuperCLI" />
+    <meta property="og:title" content="SuperCLI — Agent 模型排行榜" />
+    <meta
+      property="og:description"
+      content="按 Agentic Index 排序的 Agent 模型快照排行，数据转发自 ModelGo 公开接口。"
+    />
+    <meta property="og:image" content="https://supercli.site/social-card-zh.png" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="canonical" href="https://supercli.site/models" />
+    <title>Agent 模型排行榜 — SuperCLI</title>
+    <script type="module" src="/src/model-ranking.ts"></script>
+  </head>
+  <body class="models-body">
+    <a class="skip" href="#model-ranking">跳到模型排行</a>
+    <header class="header wrap">
+      <a class="brand" href="/" aria-label="SuperCLI 首页"
+        ><img
+          class="brand-lockup"
+          src="/brand/supercli-wordmark.svg"
+          alt="SuperCLI"
+          width="210"
+          height="45"
+      /></a>
+      <nav aria-label="主导航">
+        <a href="/#directory">探索 CLI</a><a href="/models">模型排行</a
+        ><a href="/#use-cases">场景指南</a
+        ><a
+          href="https://github.com/webkubor/supercli"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><i data-lucide="git-fork"></i><span>GitHub</span></a
+        >
+      </nav>
+      <div class="language-switch" aria-label="切换语言">
+        <a href="/models" data-language="zh" lang="zh-CN" hreflang="zh-CN">中文</a
+        ><a href="/en/models" data-language="en" lang="en" hreflang="en">EN</a>
+      </div>
+    </header>
+    <main class="wrap models-page" id="models-main">
+      <section class="models-intro">
+        <div class="models-hero-copy">
+          <p class="models-eyebrow"><span aria-hidden="true"></span>SuperCLI / MODEL INTELLIGENCE</p>
+          <h1>Agent 模型<br /><span>谁更会干活。</span></h1>
+          <p class="intro">看任务能力，也看完成它的成本。<br />用同一份快照，比较你的下一个 Agent 模型。</p>
+          <div class="models-facts">
+            <div><span>参榜模型</span><strong id="models-total">—</strong></div>
+            <div><span>数据快照</span><strong id="models-date">—</strong></div>
+            <div><span>排序指标</span><strong>Agentic Index</strong></div>
+          </div>
+        </div>
+        <aside class="models-leader" aria-label="当期榜首">
+          <span class="models-leader-label">SNAPSHOT LEADER</span>
+          <div id="models-leader-content"><p class="models-leader-loading">正在加载模型排行…</p></div>
+        </aside>
+      </section>
+      <div class="models-provenance">
+        <p class="models-source">数据来源：<a href="https://modelgo.ai/models/rankings/agent" target="_blank" rel="noopener noreferrer">ModelGo Agent Rankings<i data-lucide="arrow-up-right" aria-hidden="true"></i></a><span>按上游最新快照展示，本站不参与评分。</span></p>
+        <p class="ranking-status" id="ranking-status" role="status" aria-live="polite">正在加载模型排行…</p>
+      </div>
+      <section class="models-panel" aria-label="Agent 模型排行">
+        <div class="models-toolbar">
+          <div><h2>Agent 排行榜</h2><p>能力、成本与速度，一起看。</p></div>
+          <nav class="models-pagination" aria-label="排行分页">
+            <button type="button" class="models-page-button" id="models-previous" aria-label="上一页" disabled><i data-lucide="chevron-left" aria-hidden="true"></i></button>
+            <span id="models-page" aria-live="polite">—</span>
+            <button type="button" class="models-page-button" id="models-next" aria-label="下一页" disabled><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+            <button type="button" class="models-refresh" id="models-retry"><i data-lucide="refresh-cw" aria-hidden="true"></i>刷新数据</button>
+          </nav>
+        </div>
+        <p class="models-scroll-hint">左右滑动查看完整指标</p>
+        <div id="model-ranking"></div>
+      </section>
+      <noscript>请启用 JavaScript 以加载最新模型排行，或访问 <a href="https://modelgo.ai/models/rankings/agent">ModelGo 数据来源</a>。</noscript>
+      <p class="models-note">
+        Agentic Index 衡量工具调用与端到端任务完成能力；单任务成本为加权基准任务成本（USD/任务），按厂商按量 API 计价口径统计，订阅制套餐另计。厂商名旁的「官方价」「官方套餐」指向官方定价页，可自行核对上游数字。数值可能为空，表示该模型当期无该指标数据，不表示 0。
+      </p>
+      <p class="models-attribution">图标来自 <a href="https://icons.lobehub.com/" target="_blank" rel="noopener noreferrer">LobeHub Icons</a> · <a href="/model-icons/LICENSE">MIT</a> · 品牌归各权利人所有</p>
+    </main>
+    <footer class="wrap footer">
+      <a class="brand" href="/"
+        ><img
+          class="brand-lockup"
+          src="/brand/supercli-wordmark.svg"
+          alt="SuperCLI"
+          width="180"
+          height="38"
+      /></a>
+      <p>排行数据转发自 ModelGo 公开接口 · 商标归各权利人所有</p>
+      <a href="/brand.html">品牌与设计</a>
+    </footer>
+  </body>
+</html>

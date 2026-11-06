@@ -2,7 +2,11 @@
 import { readFileSync, existsSync } from "node:fs";
 import assert from "node:assert/strict";
 import { validateGuides } from "./guide-validation.ts";
-import { validateCatalog, validateMetrics } from "./validation.mjs";
+import {
+  validateCatalog,
+  validateMetrics,
+  validatePricingSourcesRegistry,
+} from "./validation.mjs";
 import { validateReviews } from "./review-validation.mjs";
 import { validateCommunity } from "./community-validation.mjs";
 import {
@@ -28,6 +32,7 @@ validateRecommendationTranslations(
 validateContributors(read("data/contributors.json"), community);
 validateMetrics(snapshot, catalog);
 validateUsage(read("data/usage.json"), catalog);
+validatePricingSourcesRegistry(read("data/pricing-sources.json"));
 for (const item of catalog)
   assert(existsSync(`public/icons/${item.icon}`), `缺少 ${item.icon} 图标`);
 // 头像本地化：每个署名者的头像文件必须真实存在，缺图直接拦构建。

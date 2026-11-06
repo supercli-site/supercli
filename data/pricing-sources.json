@@ -1,0 +1,1551 @@
+{
+  "snapshotDate": "2026-11-05T00:00:00.000Z",
+  "vendors": [
+    {
+      "id": "minimax",
+      "name": "MiniMax",
+      "upstreamCreators": [
+        "MiniMax"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://platform.minimax.cn/docs/pricing/overview",
+          "label": "开放平台定价概览（语言模型）",
+          "lang": "zh",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:16.090Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "MiniMax-M3.1-Flash 输入",
+              "value": 1,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "MiniMax-M3.1-Flash 1.00 4.00 0.10 标准",
+              "model": "MiniMax-M3.1-Flash"
+            },
+            {
+              "item": "MiniMax-M3.1-Flash 输出",
+              "value": 4,
+              "unit": "CNY_PER_1M_OUTPUT_TOKENS",
+              "quote": "MiniMax-M3.1-Flash 1.00 4.00 0.10 标准",
+              "model": "MiniMax-M3.1-Flash"
+            },
+            {
+              "item": "MiniMax-M3.1-Flash 缓存读取",
+              "value": 0.1,
+              "unit": "CNY_PER_1M_CACHE_READ_TOKENS",
+              "quote": "MiniMax-M3.1-Flash 1.00 4.00 0.10 标准",
+              "model": "MiniMax-M3.1-Flash"
+            },
+            {
+              "item": "MiniMax-M3 ≤512k 输入（永久五折）",
+              "value": 2.1,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "MiniMax-M3 ≤ 512k 输入 tokens 永久五折 4.20 2.10 16.80 8.40 0.84 0.42",
+              "model": "MiniMax-M3"
+            },
+            {
+              "item": "MiniMax-M3 ≤512k 输出（永久五折）",
+              "value": 8.4,
+              "unit": "CNY_PER_1M_OUTPUT_TOKENS",
+              "quote": "MiniMax-M3 ≤ 512k 输入 tokens 永久五折 4.20 2.10 16.80 8.40 0.84 0.42",
+              "model": "MiniMax-M3"
+            },
+            {
+              "item": "MiniMax-M3 ≤512k 缓存读取（永久五折）",
+              "value": 0.42,
+              "unit": "CNY_PER_1M_CACHE_READ_TOKENS",
+              "quote": "MiniMax-M3 ≤ 512k 输入 tokens 永久五折 4.20 2.10 16.80 8.40 0.84 0.42",
+              "model": "MiniMax-M3"
+            },
+            {
+              "item": "MiniMax-M3 >512k 输入（永久五折）",
+              "value": 4.2,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "MiniMax-M3 > 512k 输入 tokens 永久五折 8.40 4.20 33.60 16.80 1.68 0.84",
+              "model": "MiniMax-M3"
+            },
+            {
+              "item": "MiniMax-M3 >512k 输出（永久五折）",
+              "value": 16.8,
+              "unit": "CNY_PER_1M_OUTPUT_TOKENS",
+              "quote": "MiniMax-M3 > 512k 输入 tokens 永久五折 8.40 4.20 33.60 16.80 1.68 0.84",
+              "model": "MiniMax-M3"
+            },
+            {
+              "item": "MiniMax-M3 >512k 缓存读取（永久五折）",
+              "value": 0.84,
+              "unit": "CNY_PER_1M_CACHE_READ_TOKENS",
+              "quote": "MiniMax-M3 > 512k 输入 tokens 永久五折 8.40 4.20 33.60 16.80 1.68 0.84",
+              "model": "MiniMax-M3"
+            }
+          ],
+          "contentSha256": "566f1b873ba714e1a7c3b1edd2508654cc90de956349b440bb540c7c692d13b9",
+          "rendered": true
+        },
+        {
+          "kind": "api_pricing",
+          "url": "https://platform.minimax.io/docs/pricing/overview",
+          "label": "国际开放平台定价概览（美元）",
+          "lang": "en",
+          "checkedAt": "2026-11-05T10:31:17.148Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "MiniMax-M3 ≤512k 输入（国际站）",
+              "value": 0.3,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "MiniMaxM3.1Flash $0.15 $0.60 $0.015 Standard Priority* Model Input $ / M tokens Output $ / M tokens Prompt caching Read $ / M tokens MiniMaxM3 ≤ 512k input tokens Permanent 50% off $0.60 $0.30 $2.40 $1.20",
+              "model": "MiniMax-M3"
+            },
+            {
+              "item": "MiniMax-M3 ≤512k 输出（国际站）",
+              "value": 1.2,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "MiniMaxM3.1Flash $0.15 $0.60 $0.015 Standard Priority* Model Input $ / M tokens Output $ / M tokens Prompt caching Read $ / M tokens MiniMaxM3 ≤ 512k input tokens Permanent 50% off $0.60 $0.30 $2.40 $1.20 $0.12 $0.06",
+              "model": "MiniMax-M3"
+            },
+            {
+              "item": "MiniMax-M3 ≤512k 缓存读取（国际站）",
+              "value": 0.06,
+              "unit": "USD_PER_1M_CACHE_READ_TOKENS",
+              "quote": "MiniMaxM3.1Flash $0.15 $0.60 $0.015 Standard Priority* Model Input $ / M tokens Output $ / M tokens Prompt caching Read $ / M tokens MiniMaxM3 ≤ 512k input tokens Permanent 50% off $0.60 $0.30 $2.40 $1.20 $0.12 $0.06 MiniMaxM3 >",
+              "model": "MiniMax-M3"
+            }
+          ],
+          "contentSha256": "ec1a7902cf8026f8a25dc05c01d7568527d5eeabff099e6cf2bdb28be38db315"
+        },
+        {
+          "kind": "api_pricing",
+          "url": "https://www.minimax.cn/setting/get_app_settings?fe_setting_key=code_plan_landing",
+          "label": "官网站点设置接口（机器可读，含 apiPricing.m3 分档价）",
+          "lang": "zh",
+          "checkedAt": "2026-11-05T10:31:17.643Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "MiniMax-M3 ≤512k 输入（原始价）",
+              "value": 4.2,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "[ { \"value\": \"2.1\", \"unit\": \"tokenUnit\" }, { \"value\": \"8.4\", \"unit\": \"tokenUnit\" }, { \"value\": \"0.42\", \"unit\": \"tokenUnit\" }, { \"value\": \"2.625\", \"unit\": \"tokenUnit\" } ] }, { \"name\": \"MiniMaxM2.7highspeed\", \"prices\": [ { \"value\": \"4.2\", \"unit",
+              "model": "MiniMax-M3"
+            },
+            {
+              "item": "MiniMax-M3 ≤512k 输出（原始价）",
+              "value": 16.8,
+              "unit": "CNY_PER_1M_OUTPUT_TOKENS",
+              "quote": "[ { \"value\": \"2.1\", \"unit\": \"tokenUnit\" }, { \"value\": \"8.4\", \"unit\": \"tokenUnit\" }, { \"value\": \"0.42\", \"unit\": \"tokenUnit\" }, { \"value\": \"2.625\", \"unit\": \"tokenUnit\" } ] }, { \"name\": \"MiniMaxM2.7highspeed\", \"prices\": [ { \"value\": \"4.2\", \"unit\": \"tokenUnit\" }, { \"value\": \"16.8\", \"unit",
+              "model": "MiniMax-M3"
+            },
+            {
+              "item": "MiniMax-M3 ≤512k 缓存读取（原始价）",
+              "value": 0.84,
+              "unit": "CNY_PER_1M_CACHE_READ_TOKENS",
+              "quote": "MiniMaxM3\", \"badge\": \"最新发布 · 旗舰多模态\", \"description\": \"新一代旗舰多模态模型, 统一处理文本与图像, 编程 / 推理 / 视觉理解全面升级。\", \"contextTiers\": [ { \"name\": \"上下文 ≤ 512K\", \"description\": \"标准档\", \"prices\": [ { \"value\": \"2.1\", \"originalValue\": \"4.2\", \"unit\": \"tokenUnit\" }, { \"value\": \"8.4\", \"originalValue\": \"16.8\", \"unit\": \"tokenUnit\" }, { \"value\": \"0.42\", \"originalValue\": \"0.84\", \"unit\": \"",
+              "model": "MiniMax-M3"
+            }
+          ],
+          "contentSha256": "ffadedbfa37297fe57bd9c55341527c15e450c7aa8bfde5fa813dc28c1ec440f"
+        },
+        {
+          "kind": "subscription_plan",
+          "url": "https://www.minimax.cn/m-plan",
+          "label": "M Plan 订阅套餐（Go / Explore / Build）",
+          "lang": "zh",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:17.862Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "M Plan Go",
+              "value": 49,
+              "unit": "CNY_PER_MONTH",
+              "quote": "￥ 49 /月"
+            },
+            {
+              "item": "M Plan Explore",
+              "value": 119,
+              "unit": "CNY_PER_MONTH",
+              "quote": "￥ 119 /月"
+            },
+            {
+              "item": "M Plan Build",
+              "value": 469,
+              "unit": "CNY_PER_MONTH",
+              "quote": "￥ 469 /月"
+            },
+            {
+              "item": "M Plan Go 积分",
+              "value": 4489,
+              "unit": "CREDITS",
+              "quote": "4,489 积分"
+            },
+            {
+              "item": "M Plan Explore 积分",
+              "value": 22460,
+              "unit": "CREDITS",
+              "quote": "22,460 积分"
+            },
+            {
+              "item": "M Plan Build 积分",
+              "value": 74900,
+              "unit": "CREDITS",
+              "quote": "74,900 积分"
+            }
+          ],
+          "contentSha256": "803b3be57e94cd3e2a366042afd94a41b2ee9bce2b1fce893a7869653bbe823f",
+          "rendered": true
+        }
+      ],
+      "note": "官方只区分「缓存读取」，没有缓存写入计价；价格表里已无 MiniMax-M2.7。优先服务按标准价 1.5 倍计费。国际站直接以美元标价：M3 ≤512k 输入 $0.30 / 输出 $1.20 / 缓存读取 $0.06 每百万 tokens（与国内站 ¥2.10/¥8.40/¥0.42 按约 7.0 汇率一致）。M Plan 积分包另有 ¥30/4,489、¥150/22,460、¥500/74,900 三档，订阅年付为 Go ¥490/年、Explore ¥1,190/年、Build ¥4,690/年。"
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "upstreamCreators": [
+        "OpenAI"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "label": "开发者文档定价页",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:18.045Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "GPT-6 Astra 输入",
+              "value": 10,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": " $50.00 $1.00 $12.50 $25.00 gpt6.1sol $2.00 $10.00 $0.10 $",
+              "model": "gpt-6-astra"
+            },
+            {
+              "item": "GPT-6 Astra 输出",
+              "value": 50,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "gpt6astra $10.00 $50.00 $1.00 $1",
+              "model": "gpt-6-astra"
+            },
+            {
+              "item": "GPT-5.6 Sol 输入",
+              "value": 4,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "gpt5.6sol $4.00 $20.00 $",
+              "model": "gpt-5.6-sol"
+            },
+            {
+              "item": "GPT-5.6 Sol 输出",
+              "value": 20,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "gpt5.6sol $4.00 $20.00 $0.40 $5",
+              "model": "gpt-5.6-sol"
+            }
+          ],
+          "contentSha256": "839e612d82b324e0ed64ff79d128afda27fa8dbd9a42e4070df952a132fe6b05"
+        },
+        {
+          "kind": "subscription_plan",
+          "url": "https://chatgpt.com/pricing",
+          "label": "ChatGPT 订阅套餐",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:19.736Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "ChatGPT Pro",
+              "value": 100,
+              "unit": "USD_PER_MONTH",
+              "quote": "：Monthly API credits、否 套餐：Plus，功能：Monthly API credits、否 Pro 100 提供 ，Pro"
+            }
+          ],
+          "contentSha256": "6659d7ede26c06743f7237501b2bfb1033b83cd75e8ebaad813e7d811df779db"
+        }
+      ],
+      "note": "platform.openai.com/docs/pricing 301 到 developers.openai.com；openai.com/api/pricing 403（反爬），未收录。价格列序：输入 / 输出 / 缓存输入 / 30m 写入 / 12h 写入。"
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "upstreamCreators": [
+        "Anthropic"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "label": "Claude 平台定价页",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:20.734Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Claude Fable 5.1 输入",
+              "value": 10,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "ding reasoning and longhorizon agentic work $10 / MTok $50 / MTok $12.50 / MTok $20 / MTok $0.25 / M",
+              "model": "Claude Fable 5.1"
+            },
+            {
+              "item": "Claude Fable 5.1 输出",
+              "value": 50,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "ing and longhorizon agentic work $10 / MTok $50 / MTok $12.50 / MTok $20 / MTok $0.25 / MTok Claude ",
+              "model": "Claude Fable 5.1"
+            },
+            {
+              "item": "Claude Fable 5.1 缓存命中",
+              "value": 0.25,
+              "unit": "USD_PER_1M_CACHE_READ_TOKENS",
+              "quote": " / MTok $50 / MTok $12.50 / MTok $20 / MTok $0.25 / MTok Claude Opus 5.5 For longrunning agentic cod",
+              "model": "Claude Fable 5.1"
+            }
+          ],
+          "contentSha256": "f2134614b7c8d9a65fb6ab62e8c69714dbab4133c3c6799b53681297dc64163d"
+        },
+        {
+          "kind": "subscription_plan",
+          "url": "https://claude.com/pricing",
+          "label": "Claude 订阅套餐",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:21.619Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Claude Pro",
+              "value": 20,
+              "unit": "USD_PER_MONTH",
+              "quote": "with annual subscription discount ( $200 billed up front). $20 if bill"
+            },
+            {
+              "item": "Claude Max",
+              "value": 100,
+              "unit": "USD_PER_MONTH",
+              "quote": "els Claude in Chrome and Microsoft 365 Max For allday work $100 Per mon"
+            }
+          ],
+          "contentSha256": "66b34bb12b92077fa12275068ad4704b560fe5b9355e35e7cd37566d69f1c80c"
+        }
+      ],
+      "note": "docs.anthropic.com 已 301 到 platform.claude.com；Pro 年付折算 $17/月（$200 一次性）。价格列序：输入 / 输出 / 5m 缓存写入 / 1h 缓存写入 / 缓存命中。"
+    },
+    {
+      "id": "google",
+      "name": "Google",
+      "upstreamCreators": [
+        "Google"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://aistudio.google.com/docs/pricing",
+          "label": "AI Studio 定价页",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:22.749Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Gemini 3.8 Flash 输入（2026-12-31 前）",
+              "value": 0.75,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "gemini3.8flash\" variant=\"ais\" %} Try it in Google AI Studio {% /button %} {% /rightcolumn %} {% /twocolumnlayout %} {% hr /%} Our most intelligent Flash model, engineered for longhorizon software engineering, autonomous agents, and complex enterprise workflows. {% tabs %} {% tab title=\"Standard\" %} {% table %} * Feature * Free Tier * Paid Tier, per 1M tokens in USD * Input price * Free of charge * $0.75 through Dec",
+              "model": "Gemini 3.8 Flash"
+            },
+            {
+              "item": "Gemini 3.8 Flash 输入（2027 起）",
+              "value": 1.5,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "gemini3.8flash\" variant=\"ais\" %} Try it in Google AI Studio {% /button %} {% /rightcolumn %} {% /twocolumnlayout %} {% hr /%} Our most intelligent Flash model, engineered for longhorizon software engineering, autonomous agents, and complex enterprise workflows. {% tabs %} {% tab title=\"Standard\" %} {% table %} * Feature * Free Tier * Paid Tier, per 1M tokens in USD * Input price * Free of charge * $0.75 through December 31, 2026. $1.50 starting Ja",
+              "model": "Gemini 3.8 Flash"
+            },
+            {
+              "item": "Gemini 3.8 Flash 输出（2026-12-31 前）",
+              "value": 3.75,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "cluding thinking tokens) * Free of charge * $3.75 through December 31, 2026. $7.50 starting January ",
+              "model": "Gemini 3.8 Flash"
+            },
+            {
+              "item": "Gemini 3.8 Flash 输出（2027 起）",
+              "value": 7.5,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "f charge * $3.75 through December 31, 2026. $7.50 starting January 1, 2027. * Context caching price ",
+              "model": "Gemini 3.8 Flash"
+            }
+          ],
+          "contentSha256": "63c946e55d4e6819d68930b1b4c24c477d29c3a81127b221d7579dad7f619eaa"
+        }
+      ],
+      "note": "ai.google.dev/gemini-api/docs/pricing 301 到该地址；页面价格带促销期，2027-01-01 起 Gemini 3.8 Flash 输入输出翻倍。"
+    },
+    {
+      "id": "meta",
+      "name": "Meta",
+      "upstreamCreators": [
+        "Meta"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://dev.meta.ai/docs/pricing-rate-limits",
+          "label": "Meta Model API 定价页",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:23.290Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Muse Wonder 1.0 输入",
+              "value": 4,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "musewonder1.0 . Usage Standard mode (per 1M tokens) Contributor mode (per 1M tokens) Cached input $0.20 Not available Input $4.00 Not avai",
+              "model": "muse-wonder-1.0"
+            },
+            {
+              "item": "Muse Wonder 1.0 输出",
+              "value": 20,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "musewonder1.0 . Usage Standard mode (per 1M tokens) Contributor mode (per 1M tokens) Cached input $0.20 Not available Input $4.00 Not available Output $20.00 Not avai",
+              "model": "muse-wonder-1.0"
+            },
+            {
+              "item": "Muse Wonder 1.0 缓存输入",
+              "value": 0.2,
+              "unit": "USD_PER_1M_CACHE_READ_TOKENS",
+              "quote": "musewonder1.0 . Usage Standard mode (per 1M tokens) Contributor mode (per 1M tokens) Cached input $0.20 Not availab",
+              "model": "muse-wonder-1.0"
+            }
+          ],
+          "contentSha256": "c5558a12cc104ea8bc887464c570c25c0bb3ce3fdbc4d78432ba9fdfdd78c4ec"
+        }
+      ],
+      "note": "llama.developer.meta.com 已 302 到 dev.meta.ai。榜单在列的 Muse Spark 1.3 / Muse Glimmer 定价未在静态 HTML 中给出，只有 Muse Wonder 的表格；列序：缓存输入 / 输入 / 输出（Standard 模式）。"
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "upstreamCreators": [
+        "DeepSeek"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+          "label": "定价概览（人民币）",
+          "lang": "zh",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:23.958Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "DeepSeek V4 Pro 输入（空闲时段）",
+              "value": 4.5,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "支持 支持 对话前缀续写（Beta） 支持 支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 图像理解 支持 不支持 价格 (2) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2",
+              "model": "deepseek-v4-pro"
+            },
+            {
+              "item": "DeepSeek V4 Pro 输入（高峰时段）",
+              "value": 9,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "支持 支持 对话前缀续写（Beta） 支持 支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 图像理解 支持 不支持 价格 (2) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万toke",
+              "model": "deepseek-v4-pro"
+            },
+            {
+              "item": "DeepSeek V4 Pro 输出（空闲时段）",
+              "value": 13.5,
+              "unit": "CNY_PER_1M_OUTPUT_TOKENS",
+              "quote": "支持 支持 对话前缀续写（Beta） 支持 支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 图像理解 支持 不支持 价格 (2) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8",
+              "model": "deepseek-v4-pro"
+            },
+            {
+              "item": "DeepSeek Flash 输入（空闲时段）",
+              "value": 1,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "1017 DeepSeekV4Pro0813 思考模式 支持非思考与思考模式（默认） 切换方式详见 思考模式 上下文长度 1M 输出长度 最",
+              "model": "deepseek-flash"
+            }
+          ],
+          "contentSha256": "94934cfe4f1d80210ea1c88d7eec51d371fcda8c8ccd0c38baacca763993c56a"
+        },
+        {
+          "kind": "api_pricing",
+          "url": "https://api-docs.deepseek.com/quick_start/pricing",
+          "label": "定价概览（美元）",
+          "lang": "en",
+          "primary": false,
+          "checkedAt": "2026-11-05T10:31:25.403Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "DeepSeek Flash 输入（OFF-PEAK）",
+              "value": 0.15,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "Output ✓ ✓ Tool Calls ✓ ✓ Responses API ✓ ✓ Anthropic API ✓ ✓ Chat Prefix Completion（Beta） ✓ ✓ FIM Completion（Beta） Nonthinking mode only Nonthinking mode only Vision ✓ Not supported PRICING (2) 1M INPUT TOKENS (CACHE HIT) OFFPEAK $0.003 $0.022 PEAK $0.006 $0.044 1M INPUT TOKENS (CACHE MISS) OFFPEAK $0.15 $0.66 P",
+              "model": "deepseek-flash"
+            }
+          ],
+          "contentSha256": "50563fd0eefea6d5547241d3f0defb7b7d50d0f17481a453343958b636a1fe51"
+        }
+      ],
+      "note": "英文页给美元价、中文页给人民币价，均分空闲/高峰两档。deepseek.com/pricing 404。中文页未标注模型列对应关系：输入空闲 1 元/4.5 元、输出空闲 4 元/13.5 元分别对应 Flash / V4 Pro。 中文页与英文页分别给人民币价与美元价；页面只挂中文页入口，英文页 URL 见 sources。"
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral",
+      "upstreamCreators": [
+        "Mistral"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://mistral.ai/pricing",
+          "label": "定价页",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:27.364Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Mistral Large 输入",
+              "value": 0.5,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "eparately. For example, Mistral Large costs $0.5 /M tokens in and $1.5 /M tokens out. Batch processi",
+              "model": "Mistral Large"
+            },
+            {
+              "item": "Mistral Large 输出",
+              "value": 1.5,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": ", Mistral Large costs $0.5 /M tokens in and $1.5 /M tokens out. Batch processing, for highvolume wor",
+              "model": "Mistral Large"
+            }
+          ],
+          "contentSha256": "6922a36ce68e7f87a045af54e98a98a5cc559359b9eafb3239dd44b19720c92c"
+        }
+      ],
+      "note": "docs.mistral.ai/getting-started/pricing 308 到该页；榜单在列的 Mistral Medium 3.5 / Small 4 单价不在静态 HTML 中，页面只以文字给出 Mistral Large 的 token 价。"
+    },
+    {
+      "id": "cohere",
+      "name": "Cohere",
+      "upstreamCreators": [
+        "Cohere"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://www.cohere.com/pricing",
+          "label": "定价页",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:27.767Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Command A+ 输入",
+              "value": 2.5,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "ens for output Command R+ 082024 pricing is $2.50/1M tokens for input and $10.00/1M tokens for outpu",
+              "model": "Command A"
+            },
+            {
+              "item": "Command A+ 输出",
+              "value": 10,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "200 192GB ✓ $12.00 $8.00 GB200 192GB $12.50 $10.00 Reserved capacity available. Please contact sales",
+              "model": "Command A"
+            }
+          ],
+          "contentSha256": "7e7915e067584234b6a6fd64ba1c16bfcc1e034dd47d35b93f4e568fcc67e860"
+        }
+      ],
+      "note": "Command A+ 价格以 JSON 内嵌在页面数据中（值写成 $$2.50，双 $ 是转义产物）；页面上另有旧版 Command $1.00/$2.00 的文字句；榜单在列的 North Mini Code 单价未在页面给出。"
+    },
+    {
+      "id": "upstage",
+      "name": "Upstage",
+      "upstreamCreators": [
+        "Upstage"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://upstage.ai/pricing",
+          "label": "定价页",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:29.244Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Solar Pro 4 输入",
+              "value": 0.3,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "inal tasks, and longdocument reasoning Input 0.30 1M tokens Input(Cached) 0.06 1M tokens Output 1.20",
+              "model": "Solar Pro 4"
+            },
+            {
+              "item": "Solar Pro 4 输出",
+              "value": 1.2,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "ule (replaces Enhanced Pricing System v2.3) v1.2 20260806 Card markup holds STANDARD pricing; this s",
+              "model": "Solar Pro 4"
+            },
+            {
+              "item": "Solar Pro 4 缓存输入",
+              "value": 0.06,
+              "unit": "USD_PER_1M_CACHE_READ_TOKENS",
+              "quote": "reasoning Input 0.30 1M tokens Input(Cached) 0.06 1M tokens Output 1.20 1M tokens 20260805T22:00:00Z",
+              "model": "Solar Pro 4"
+            },
+            {
+              "item": "Solar Pro 3 输出",
+              "value": 0.6,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": " tokens Input(Cached) 0.015 1M tokens Output 0.6 1M tokens Solar Pro 2 Highperformance enterprise LL",
+              "model": "Solar Pro 3"
+            }
+          ],
+          "contentSha256": "9df7ceb653944400da25c72b4c7a01c5454c787f99d28b7d0a2bcb708895e422"
+        }
+      ],
+      "note": "页面未印货币符号，站点货币为 USD 且注明不含 10% VAT；Solar Pro 3 标注 2026-10-30 停止服务。"
+    },
+    {
+      "id": "spacexai",
+      "name": "SpaceXAI",
+      "upstreamCreators": [
+        "SpaceXAI"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://docs.x.ai/docs/pricing",
+          "label": "定价页",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:30.334Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Grok 4.6 输入",
+              "value": 2,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "grok4.6 Long context ≥ 200k tokens 500k $2.00 $0.50 $6.00 $4.00 $1.00 $12.00",
+              "model": "grok 4.6"
+            },
+            {
+              "item": "Grok 4.6 输出",
+              "value": 6,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "grok4.6 Long context ≥ 200k tokens 500k $2.00 $0.50 $6.00 $4.00 $1.00 $12.00",
+              "model": "grok 4.6"
+            },
+            {
+              "item": "Grok 4.6 缓存输入",
+              "value": 0.5,
+              "unit": "USD_PER_1M_CACHE_READ_TOKENS",
+              "quote": "grok4.6 Long context ≥ 200k tokens 500k $2.00 $0.50 $6.00 $4.00 $1.00 $12.00",
+              "model": "grok 4.6"
+            },
+            {
+              "item": "Grok 4.5 输入",
+              "value": 2,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "grok4.5 Long context ≥ 200k tokens 500k $2.00 $0.30 $6.00 $4.00 $0.60 $12.00",
+              "model": "grok 4.5"
+            }
+          ],
+          "contentSha256": "0642a8466d9c98b7427a757d1bf7ebb957e70cfdb7e8b02931d15ffb670af680"
+        }
+      ],
+      "note": "x.ai/api 与 x.ai/pricing 均 403（反爬），未收录。价格列序：输入 / 缓存输入 / 输出 / Batch 输入 / Batch 缓存 / Batch 输出。"
+    },
+    {
+      "id": "zai",
+      "name": "Z AI",
+      "upstreamCreators": [
+        "Z AI"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://docs.z.ai/guides/overview/pricing",
+          "label": "国际站定价文档",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:30.560Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "GLM-5.3 输入",
+              "value": 1.4,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": " $1.25 GLM5.2 $1.4 $0.26 L",
+              "model": "GLM-5.3"
+            },
+            {
+              "item": "GLM-5.3 输出",
+              "value": 4.4,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "ime Free $4.4 GLM5.1 ",
+              "model": "GLM-5.3"
+            },
+            {
+              "item": "GLM-5.3 缓存输入",
+              "value": 0.26,
+              "unit": "USD_PER_1M_CACHE_READ_TOKENS",
+              "quote": "2 $1.4 $0.26 Limited",
+              "model": "GLM-5.3"
+            }
+          ],
+          "contentSha256": "7e46ac4cd48eb4b646620cbcd54da8992f32fa99f9374e5ecf6ef452645f2201"
+        },
+        {
+          "kind": "api_pricing",
+          "url": "https://open.bigmodel.cn/pricing",
+          "label": "国内站定价页（前端渲染，无可读价格）",
+          "lang": "zh",
+          "checkedAt": "2026-11-05T10:31:30.902Z",
+          "httpStatus": 200,
+          "contentSha256": "81ba4bb34ad8eae3b9a1a15fb0f5e34739871a2a92f460701d046e3e3860bc52"
+        }
+      ],
+      "note": "列序为 输入 / 缓存输入 / 缓存存储 / 输出；GLM-5.3 输出价标为限时免费（Limited-time Free）。"
+    },
+    {
+      "id": "alibaba",
+      "name": "Alibaba",
+      "upstreamCreators": [
+        "Alibaba"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://help.aliyun.com/zh/model-studio/billing-for-model-studio",
+          "label": "百炼模型计费（输入/输出单价，每百万 Token）",
+          "lang": "zh",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:32.654Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Qwen3.8 Max 输入",
+              "value": 12,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "qwen3.8max Batch 调用 半价 上下文缓存 享有折扣 非思考和思考模式 0<Token≤1M 12 元 36 元 100 ",
+              "model": "qwen3.8-max"
+            },
+            {
+              "item": "Qwen3.8 Max 输出",
+              "value": 36,
+              "unit": "CNY_PER_1M_OUTPUT_TOKENS",
+              "quote": "qwen3.8max Batch 调用 半价 上下文缓存 享有折扣 非思考和思考模式 0<Token≤1M 12 元 36 元 100 万 Tok",
+              "model": "qwen3.8-max"
+            },
+            {
+              "item": "Qwen3.8 Flash 输入",
+              "value": 0.8,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "qwen3.8flash 上下文缓存 享有折扣 非思考和思考模式 0<Token≤1M 0.8 元 2.7 元 100",
+              "model": "qwen3.8-flash"
+            },
+            {
+              "item": "Qwen3.8 Flash 输出",
+              "value": 2.7,
+              "unit": "CNY_PER_1M_OUTPUT_TOKENS",
+              "quote": "qwen3.8flash 上下文缓存 享有折扣 非思考和思考模式 0<Token≤1M 0.8 元 2.7 元 100 万 Tok",
+              "model": "qwen3.8-flash"
+            }
+          ],
+          "contentSha256": "2a2d49ef8331b61b6df0bc3200a37f18f5ff1e35ae298086c1a86c3420a69ec4"
+        },
+        {
+          "kind": "api_pricing",
+          "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+          "label": "Model Studio 国际站价格（美元）",
+          "lang": "en",
+          "checkedAt": "2026-11-05T10:31:33.561Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Qwen3.8 Max 输入（国际站）",
+              "value": 2,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "qwen3.8max context caching discount International NonThinking and Thinking modes 0<Token≤1M $2 $6 1 millio",
+              "model": "qwen3.8-max"
+            },
+            {
+              "item": "Qwen3.8 Max 输出（国际站）",
+              "value": 6,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "qwen3.8max context caching discount International NonThinking and Thinking modes 0<Token≤1M $2 $6 1 million t",
+              "model": "qwen3.8-max"
+            }
+          ],
+          "contentSha256": "b7e3ec3dab290bfc0f0eb6b726f9e0bbf966a2571bfa9e1b131dfe6cf2c60e7b"
+        }
+      ],
+      "note": "国内站 ¥/国际站 $/新加坡地域三套价表独立；按输入 Token 长度分档；Batch 调用半价、上下文缓存另有折扣。"
+    },
+    {
+      "id": "tencent",
+      "name": "Tencent",
+      "upstreamCreators": [
+        "Tencent"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://cloud.tencent.com/document/product/1729/97731",
+          "label": "腾讯混元生文计费概述（刊例价，每百万 tokens）",
+          "lang": "zh",
+          "checkedAt": "2026-11-05T10:31:34.223Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Hunyuan-a13b 输入",
+              "value": 0.5,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "Hunyuan-a13b 输入：0.5元 输出：2元",
+              "model": "Hunyuan-a13b"
+            },
+            {
+              "item": "Hunyuan-a13b 输出",
+              "value": 2,
+              "unit": "CNY_PER_1M_OUTPUT_TOKENS",
+              "quote": "Hunyuan-a13b 输入：0.5元 输出：2元",
+              "model": "Hunyuan-a13b"
+            },
+            {
+              "item": "Hunyuan-role-latest 输入",
+              "value": 2.4,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "g 100万 tokens。 资源包有效期为1年，自开通服务之日起1年内若免费资源包未使用完，则过期作废。 注意： 在账单结算时，系统将按照免费资源包 > 付费资源包 > 按量后付费的顺序进行结算，即免费资源包优先扣除。 若您欠费或因违规原因停服，将不能继续享受免费额度，只有服务重新开启后才可继续享受免费额度。 混元生文价格说明 token 后付费 在免费额度用完后，按如下价格进行后付费计费，每月1 3日系统会推送上个月账单并自动完成结算和扣费。 默认情况下，免费资源包耗尽或到期后 不会 自动转入后付费，如果您未主动开通后付费，将出现计费异常提示。如需使用后付费模式结算，请前往腾讯混元大模型 控制台 > 设置 > 后付费设置 开通后付费。 产品名 刊例价（每 百万 tokens） Hunyuana13b 输入：0.5元 输出：2元 Hunyuanrolelatest 输入：2.4元 输出：9.6",
+              "model": "Hunyuan-role-latest"
+            },
+            {
+              "item": "Hunyuan-role-latest 输出",
+              "value": 9.6,
+              "unit": "CNY_PER_1M_OUTPUT_TOKENS",
+              "quote": "g 100万 tokens。 资源包有效期为1年，自开通服务之日起1年内若免费资源包未使用完，则过期作废。 注意： 在账单结算时，系统将按照免费资源包 > 付费资源包 > 按量后付费的顺序进行结算，即免费资源包优先扣除。 若您欠费或因违规原因停服，将不能继续享受免费额度，只有服务重新开启后才可继续享受免费额度。 混元生文价格说明 token 后付费 在免费额度用完后，按如下价格进行后付费计费，每月1 3日系统会推送上个月账单并自动完成结算和扣费。 默认情况下，免费资源包耗尽或到期后 不会 自动转入后付费，如果您未主动开通后付费，将出现计费异常提示。如需使用后付费模式结算，请前往腾讯混元大模型 控制台 > 设置 > 后付费设置 开通后付费。 产品名 刊例价（每 百万 tokens） Hunyuana13b 输入：0.5元 输出：2元 Hunyuanrolelatest 输入：2.4元 输出：9.6元 Hunyua",
+              "model": "Hunyuan-role-latest"
+            }
+          ],
+          "contentSha256": "98d463a142bfcfa525dae5d3332744aada320e8fcfbd3ead0e230366e73dd925"
+        }
+      ],
+      "note": "curl 直取拿到的是 JS 反爬壳（HTTP 200 但无正文），正文需真实浏览器渲染读取。页面提示相关能力正迁移到 TokenHub。榜单在列型号为 Hy3。"
+    },
+    {
+      "id": "kimi",
+      "name": "Kimi",
+      "upstreamCreators": [
+        "Kimi"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://platform.moonshot.cn/docs/pricing/chat",
+          "label": "Moonshot 开放平台计费文档（人民币）",
+          "lang": "zh",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:38.257Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Kimi K3.1 Pro 输入（国内站）",
+              "value": 13,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "kimi-k3.1-pro ¥13.00 / MTok",
+              "model": "kimi-k3.1-pro"
+            },
+            {
+              "item": "Kimi K3.1 Pro 输出（国内站）",
+              "value": 68,
+              "unit": "CNY_PER_1M_OUTPUT_TOKENS",
+              "quote": "kimi-k3.1-pro ¥13.00 / MTok ¥68.00 / MTok",
+              "model": "kimi-k3.1-pro"
+            }
+          ],
+          "contentSha256": "0ccdc6cfacd497e0faeb465da64db362d68e0ec17d7234c9eb3c17dfc34ea602",
+          "rendered": true
+        },
+        {
+          "kind": "api_pricing",
+          "url": "https://platform.kimi.ai/docs/pricing/chat",
+          "label": "Kimi 国际站计费文档（美元）",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:38.548Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Kimi K3.1 Pro 输入（国际站）",
+              "value": 2,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": " of 5m. For TTL settings and cost optimization tips, see Best Practices for Context Caching . Batch API Inference : kimik3.1pro and kimik3 support batch inference for largescale tasks that do not require realtime responses, billed at 60% of the standard price. ​ K2 Series ",
+              "model": "kimi-k3.1-pro"
+            },
+            {
+              "item": "Kimi K3.1 Pro 输出（国际站）",
+              "value": 10,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "kimi-k3.1-pro $2.00 / MTok $10.00 / MTok",
+              "model": "kimi-k3.1-pro"
+            }
+          ],
+          "contentSha256": "b5a2417698e40e3f9328b8cff03eec7cd9424854bdb8bf6ee48744f542eab643",
+          "rendered": true
+        }
+      ],
+      "note": "国内站与国际站是两张独立的价表（人民币/美元）。platform.moonshot.ai 会 301 到 platform.kimi.ai。K2 系列：kimi-k2.6 ¥6.50/¥27.00，kimi-k2.7-code ¥6.50/¥27.00。价格由前端渲染，需真实浏览器读取。"
+    },
+    {
+      "id": "xiaomi",
+      "name": "Xiaomi",
+      "upstreamCreators": [
+        "Xiaomi"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://platform.xiaomimimo.com/docs/pricing",
+          "label": "MiMo 开放平台定价文档（国内/海外两套价）",
+          "lang": "zh",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:40.019Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "MiMo V2.6 Pro 输入（国内）",
+              "value": 3,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "mimo-v2.6-pro ¥0.025 ¥3.00 ¥6.00",
+              "model": "mimo-v2.6-pro"
+            },
+            {
+              "item": "MiMo V2.6 Pro 输出（国内）",
+              "value": 6,
+              "unit": "CNY_PER_1M_OUTPUT_TOKENS",
+              "quote": "mimo-v2.6-pro ¥0.025 ¥3.00 ¥6.00",
+              "model": "mimo-v2.6-pro"
+            },
+            {
+              "item": "MiMo V2.6 Pro 输入（海外）",
+              "value": 0.435,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "mimo-v2.6-pro $0.0036 $0.435 $0.87",
+              "model": "mimo-v2.6-pro"
+            },
+            {
+              "item": "MiMo V2.6 Pro 输出（海外）",
+              "value": 0.87,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "mimo-v2.6-pro $0.0036 $0.435 $0.87",
+              "model": "mimo-v2.6-pro"
+            }
+          ],
+          "contentSha256": "c37a6b810c233a461fa9cc75160ddb853cb4591e9b47df693349639c0b97893d",
+          "rendered": true
+        }
+      ],
+      "note": "同页并列国内（¥/百万 tokens）与海外（$/百万 tokens）两套价，价格需浏览器渲染读取。www.xiaomi-mimo-ai.com/pricing.html 虽可访问但页脚写明是社区非官方资源，未采纳。"
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA",
+      "upstreamCreators": [
+        "NVIDIA"
+      ],
+      "sources": [
+        {
+          "kind": "model_doc",
+          "url": "https://build.nvidia.com/nvidia/nemotron-3.5-super-vl-120b-a12b",
+          "label": "模型页 Deploy 区的 serverless 单价",
+          "lang": "en",
+          "checkedAt": "2026-11-05T10:31:40.451Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Nemotron 3.5 Super-VL-120B-A12B 输入（CoreWeave serverless）",
+              "value": 0.15,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "Serverless (per 1M tokens) $0.15/input | $0.50/output",
+              "model": "Nemotron"
+            },
+            {
+              "item": "Nemotron 3.5 Super-VL-120B-A12B 输出（CoreWeave serverless）",
+              "value": 0.5,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "Serverless (per 1M tokens) $0.15/input | $0.50/output",
+              "model": "Nemotron"
+            }
+          ],
+          "contentSha256": "02d2a29800d42f7e0edb70bda952ed115f9b942c5b46d0e5243438dcd1007bf6",
+          "rendered": true
+        }
+      ],
+      "note": "build.nvidia.com/pricing 虽返回 200，但渲染出来是与乱路径完全相同的 404 空壳，没有价格表，未登记。真实单价只出现在各模型页的 Deploy 区（按 endpoint provider 分别列出），且需浏览器渲染。NIM 托管 API 是免费原型额度（页面 FAQ：All models on build.nvidia.com are free to prototype with / no per-token billing，40 RPM 限速）。"
+    },
+    {
+      "id": "ibm",
+      "name": "IBM",
+      "upstreamCreators": [
+        "IBM"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://www.ibm.com/products/watsonx-ai/pricing",
+          "label": "watsonx.ai 定价页（模型按量价 + 套餐价）",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:40.877Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Granite 4H Small 输入",
+              "value": 0.0636,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "granite4hsmall IBM USD 0.0636 per 1M toke",
+              "model": "granite-4h-small"
+            },
+            {
+              "item": "Granite 4H Small 输出",
+              "value": 0.265,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "granite4hsmall IBM USD 0.0636 per 1M tokens input USD 0.265 per 1M toke",
+              "model": "granite-4h-small"
+            },
+            {
+              "item": "watsonx.ai Standard 套餐（起价）",
+              "value": 1110,
+              "unit": "USD_PER_MONTH",
+              "quote": "Standard package options. Learn more Pricing plans — multiple payment options available Free Toolbox playground Foundation Models : Up to 300,000 tokens per month Machine Learning Tools: Up to 20 Compute Usage Hours (CUH) per month Text Extraction: Up to 100 documents per month Start your free trial Essentials (Payasyougo) Production deployments Starting at USD 0/month * Model price breakdown *** Featurespecific price breakdown ** Standard (Payasyougo) Enterprise production Starting at USD 1110/month* Mode",
+              "model": "Standard"
+            }
+          ],
+          "contentSha256": "4112b615b6b24b3bccf13f0f7e8bb79077882fc96f352d037cd2c043e69e8d2e"
+        }
+      ],
+      "note": "模型按量价与套餐价同页；Essentials 从 USD 0/月起，Standard 从 USD 1110/月起。gpt-oss-120b 为 USD 0.159 输入 / USD 0.636 输出 每 1M tokens。页面注明价格因国家而异；榜单在列的 Granite 4.2 系列未在页面出现。"
+    },
+    {
+      "id": "thinking-machines",
+      "name": "Thinking Machines",
+      "upstreamCreators": [
+        "Thinking Machines"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://thinkingmachines.ai/tinker/pricing/",
+          "label": "Tinker 定价页",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:41.944Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Inkling Small 输入（serverless, 256K）",
+              "value": 0.3,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": ".17 $4.05 InklingSmall 256K 256K $0.30 $0.06 $",
+              "model": "Inkling-Small"
+            },
+            {
+              "item": "Inkling Small 输出（serverless, 256K）",
+              "value": 1.2,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": ".17 $4.05 InklingSmall 256K 256K $0.30 $0.06 $1.20 Pricing",
+              "model": "Inkling-Small"
+            }
+          ],
+          "contentSha256": "6f77cf2166d54af984c3a6813e15cdca824e2ea686f9f20f9fd09b8f5c0088c5"
+        }
+      ],
+      "note": "Tinker 定价页（as of October 19, 2026）。训练/采样价另表：Inkling-Small 64K prefill $0.58、cached prefill $0.116、sample $1.44、train $1.73；存储 $0.10/GB/月。模型文档页 https://tinker-docs.thinkingmachines.ai/tinker/models/ 可访问。"
+    },
+    {
+      "id": "ifm",
+      "name": "Institute of Foundation Models",
+      "upstreamCreators": [
+        "Institute of Foundation Models"
+      ],
+      "sources": [
+        {
+          "kind": "model_doc",
+          "url": "https://docs.ifm.ai/docs/limits.md",
+          "label": "官方文档：调用限额",
+          "lang": "en",
+          "checkedAt": "2026-11-05T10:31:42.155Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "托管 API 免费额度（每日 token 上限）",
+              "value": 10000000,
+              "unit": "TOKENS_PER_DAY_FREE_QUOTA",
+              "quote": "ai). ## Daily token cap Every API key gets **10,000,000 tokens per day**, counting prompt and comple",
+              "model": "Every API key"
+            }
+          ],
+          "contentSha256": "78bfea17fa2fb35d0197e4ace07de23c8cee0d200534ee74e0a645be2e6458bb"
+        }
+      ],
+      "note": "IFM 未公开任何单价（ifm.ai 与 platform.ifm.ai 对普通请求返回 403，ifm.ai/pricing 为 404；官方文档 llms-full.txt 内无 pricing/billing 字样）。可访问的官方文档只有 docs.ifm.ai，其中 limits.md 说明免费日额度 10,000,000 tokens/Key，00:00 UTC 重置，超限返回 429。"
+    },
+    {
+      "id": "multiverse",
+      "name": "Multiverse Computing",
+      "upstreamCreators": [
+        "Multiverse Computing"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://multiversecomputing.com/compactifai/api",
+          "label": "CompactifAI API 目录页（官网同时是定价页）",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:43.162Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Quasar 438B 输入",
+              "value": 0.11,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "Building All models free your first month GLM 5.3 Input Cost $0.20/M Output Cost $0.64/M Start Building GLM 5.2 Input Cost $0.17/M Output Cost $0.54/M Start Building Qwen 3.8 27B Input Cost $0.09/M Output Cost $0.44/M Start Building Quasar 1.2 358B CompactifAI New Input Cost $0.11/M Outpu",
+              "model": "Quasar 438B"
+            },
+            {
+              "item": "Quasar 438B 输出",
+              "value": 0.33,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "Building All models free your first month GLM 5.3 Input Cost $0.20/M Output Cost $0.64/M Start Building GLM 5.2 Input Cost $0.17/M Output Cost $0.54/M Start Building Qwen 3.8 27B Input Cost $0.09/M Output Cost $0.44/M Start Building Quasar 1.2 358B CompactifAI New Input Cost $0.11/M Output Cost $0.33/M Start",
+              "model": "Quasar 438B"
+            },
+            {
+              "item": "GLM 5.3 输入",
+              "value": 0.2,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "Quasar 438B CompactifAI Input Cost $0.11/M Output Cost $0.33/M Start Building Carina 60B CompactifAI Input Cost $0.022/M Output Cost $0.085/M Start Building Whisper Large V3 Turbo Slim CompactifAI Transcription Cost $0.01/Hour Start Building All models free your first month GLM 5.3 Input Cost $0.20/M Outpu",
+              "model": "GLM 5.3"
+            },
+            {
+              "item": "GLM 5.3 输出",
+              "value": 0.64,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "Quasar 438B CompactifAI Input Cost $0.11/M Output Cost $0.33/M Start Building Carina 60B CompactifAI Input Cost $0.022/M Output Cost $0.085/M Start Building Whisper Large V3 Turbo Slim CompactifAI Transcription Cost $0.01/Hour Start Building All models free your first month GLM 5.3 Input Cost $0.20/M Output Cost $0.64/M Start",
+              "model": "GLM 5.3"
+            }
+          ],
+          "contentSha256": "57bd0199d939dd994430dc3e21cc0f116977b915f5962b5d9e757ee2b4900184"
+        }
+      ],
+      "note": "multiversecomputing.com/pricing 返回 404；价格只在这页上，且标注新用户首月免费（All models free your first month）。"
+    },
+    {
+      "id": "longcat",
+      "name": "LongCat",
+      "upstreamCreators": [
+        "LongCat"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://longcat.chat/platform/docs/zh/pricing/longcat-2.5",
+          "label": "LongCat 开放平台定价页（人民币）",
+          "lang": "zh",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:43.899Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "LongCat-2.5 输入（未命中缓存）",
+              "value": 2,
+              "unit": "CNY_PER_1M_INPUT_TOKENS",
+              "quote": "kens（限时） 输入（未命中缓存） ¥2 输入（命中缓存",
+              "model": "LongCat-2.5"
+            },
+            {
+              "item": "LongCat-2.5 输入（命中缓存）",
+              "value": 0.04,
+              "unit": "CNY_PER_1M_CACHE_READ_TOKENS",
+              "quote": "kens（限时） 输入（未命中缓存） ¥2 输入（命中缓存） ¥0.04 输出 ¥8 计",
+              "model": "LongCat-2.5"
+            },
+            {
+              "item": "LongCat-2.5 输出",
+              "value": 8,
+              "unit": "CNY_PER_1M_OUTPUT_TOKENS",
+              "quote": "kens（限时） 输入（未命中缓存） ¥2 输入（命中缓存） ¥0.04 输出 ¥8 计费项 折扣价",
+              "model": "LongCat-2.5"
+            },
+            {
+              "item": "LongCat-2.5 输入（美元）",
+              "value": 0.3,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "kens（限时） 输入（未命中缓存） ¥2 输入（命中缓存） ¥0.04 输出 ¥8 计费项 折扣价 / 百万 Tokens（限时） 输入（未命中缓存） $0.30 输入（命中缓存",
+              "model": "LongCat-2.5"
+            },
+            {
+              "item": "LongCat-2.5 输出（美元）",
+              "value": 1.2,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "kens（限时） 输入（未命中缓存） ¥2 输入（命中缓存） ¥0.04 输出 ¥8 计费项 折扣价 / 百万 Tokens（限时） 输入（未命中缓存） $0.30 输入（命中缓存） $0.006 输出 $1.20 折扣价为平台初",
+              "model": "LongCat-2.5"
+            }
+          ],
+          "contentSha256": "33fe1d79d400bfc6eef7d156bbcda99684c317380ae65ff4afd8557f7703be19"
+        },
+        {
+          "kind": "api_pricing",
+          "url": "https://longcat.chat/platform/docs/zh/api-pay-as-you-go",
+          "label": "按量付费说明（同价表 + 计算示例）",
+          "lang": "zh",
+          "checkedAt": "2026-11-05T10:31:44.041Z",
+          "httpStatus": 200,
+          "contentSha256": "25a3c9e233cc658f8f63db82042f6869467a425d39f66fd59a7fc485cd6f5b89"
+        }
+      ],
+      "note": "美团 LongCat 官方开放平台（API base: api.longcat.chat）。价格为初上线限时折扣价，原文注明「折扣价为平台初上线限时优惠，实际费用以结算为准」。英文版 /platform/docs/en/pricing/longcat-2.5 返回 ResourceNotFoundException JSON，只登记中文页。猫箱（CatBox）是面向消费者的应用，无独立定价页。"
+    },
+    {
+      "id": "openbmb",
+      "name": "OpenBMB",
+      "upstreamCreators": [
+        "OpenBMB"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://platform.modelbest.cn/models",
+          "label": "模型 API 平台（直接返回 JSON 价目）",
+          "lang": "zh",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:44.473Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "MiniCPM5-2B 输入",
+              "value": 1,
+              "unit": "CREDITS_PER_1M_INPUT_TOKENS",
+              "quote": "MiniCPM52B\",\"input_pricing\":\"1\",\"is_fr",
+              "model": "MiniCPM5-2B"
+            },
+            {
+              "item": "MiniCPM5-2B 输出",
+              "value": 3,
+              "unit": "CREDITS_PER_1M_OUTPUT_TOKENS",
+              "quote": "MiniCPM52B\",\"input_pricing\":\"1\",\"is_free\":false,\"max_output_tokens\":0,\"object\":\"model\",\"output_pricing\":\"3\",\"param",
+              "model": "MiniCPM5-2B"
+            },
+            {
+              "item": "MiniCPM-o-4.5-Realtime 输入",
+              "value": 3,
+              "unit": "CREDITS_PER_1M_INPUT_TOKENS",
+              "quote": "MiniCPMo4.5Realtime\",\"input_pricing\":\"3\",\"is_fr",
+              "model": "MiniCPM-o-4.5-Realtime"
+            },
+            {
+              "item": "VoxCPM2 输出",
+              "value": 8,
+              "unit": "CREDITS_PER_1M_OUTPUT_TOKENS",
+              "quote": "VoxCPM2\",\"input_pricing\":\"1\",\"is_free\":false,\"max_output_tokens\":0,\"object\":\"model\",\"output_pricing\":\"8\",\"param",
+              "model": "VoxCPM2"
+            }
+          ],
+          "contentSha256": "00e941d6104a2629d3f65d1c65e754d91437f63eef310f1ef994f5c2edbb5a57"
+        }
+      ],
+      "note": "面壁智能 ModelBest 官方平台。价格单位是平台「积分 / 1M tokens」，积分兑人民币的充值包价目需登录（/api/billing/credit-packages 返回 code 10001），故无法给出 CNY 单价。控制台页 /console/models 是 SPA。openbmb.com 已 NXDOMAIN，openbmb.cn 为社区站且未见公开价格表。"
+    },
+    {
+      "id": "inception",
+      "name": "Inception",
+      "upstreamCreators": [
+        "Inception"
+      ],
+      "sources": [
+        {
+          "kind": "model_doc",
+          "url": "https://docs.inceptionlabs.ai/get-started/models.md",
+          "label": "官方文档模型价格表",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:44.692Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Mercury 3 输入（发布期 5 折）",
+              "value": 0.1,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "| | | | | | **Mercury 3** | ~~\\$0.20~~ → **\\$0.10** | ~~\\$0.02~~ → **\\$0.01** | ~~\\$0.70~~ → **\\$0.3",
+              "model": "Mercury 3"
+            },
+            {
+              "item": "Mercury 3 输出（发布期 5 折）",
+              "value": 0.35,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "| ~~\\$0.02~~ → **\\$0.01** | ~~\\$0.70~~ → **\\$0.35** | `v1/chat/completions` | Chat: 1M | 131,072 | `",
+              "model": "Mercury 3"
+            },
+            {
+              "item": "Mercury 2 输出",
+              "value": 0.75,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "| ~~\\$0.04~~ → **\\$0.02** | ~~\\$1.50~~ → **\\$0.75** | `v1/chat/completions` | Chat: 128K | 50,000 | ",
+              "model": "Mercury 2"
+            }
+          ],
+          "contentSha256": "142cb02f6549a9388979ef791ada1b8721984940e2962f9da4b7152809a2773a"
+        },
+        {
+          "kind": "model_doc",
+          "url": "https://www.inceptionlabs.ai/models",
+          "label": "官网同价表",
+          "lang": "en",
+          "checkedAt": "2026-11-05T10:31:44.841Z",
+          "httpStatus": 200,
+          "contentSha256": "84e0985296df366783694c983a29457851a7975b0afd9429e84a413124cb32c3"
+        }
+      ],
+      "note": "官网 /pricing 404；platform.inceptionlabs.ai 抓取返回 429。同价表在官网 /models 也有。"
+    },
+    {
+      "id": "arcee",
+      "name": "Arcee AI",
+      "upstreamCreators": [
+        "Arcee AI"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://docs.arcee.ai/get-started/pricing",
+          "label": "官方文档定价页",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:45.105Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "zai-org/glm-5.3-flash 输入",
+              "value": 0.15,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "glm5.3flash $0.15 $0.50 $0.03",
+              "model": "glm-5.3-flash"
+            },
+            {
+              "item": "zai-org/glm-5.3-flash 输出",
+              "value": 0.5,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "glm5.3flash $0.15 $0.50 $0.03 deeps",
+              "model": "glm-5.3-flash"
+            },
+            {
+              "item": "deepseek/deepseek-v4-pro-0813 输入",
+              "value": 1.32,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "deepseekv4pro0813 $1.32 $3.96 $0.04",
+              "model": "deepseek-v4-pro-0813"
+            },
+            {
+              "item": "moonshotai/kimi-k3 输出",
+              "value": 15,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "kimik3 $3.00 $15.00 $0.30 de",
+              "model": "kimi-k3"
+            }
+          ],
+          "contentSha256": "3545cdf6c04528c333944d2994642a9a4ad0ad5b547fc7ce104cc2e8335c4ff8"
+        }
+      ],
+      "note": "该页当前列出的全是平台代售的第三方/开源模型（GLM、DeepSeek、Kimi 等）转售价，Arcee 自研模型（Trinity 系列）页未见单独 API 单价；models.arcee.ai 无法解析。"
+    },
+    {
+      "id": "celeris",
+      "name": "Celeris",
+      "upstreamCreators": [
+        "Celeris"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://celeris.ai/pricing.html",
+          "label": "官方定价页",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:45.730Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Celeris-1 输入",
+              "value": 0.2,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "d GCP, in your region. One API call, nothing to deploy. Celeris1 $0.2 / M inp",
+              "model": "Celeris-1"
+            },
+            {
+              "item": "Celeris-1 输出",
+              "value": 0.7,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "d GCP, in your region. One API call, nothing to deploy. Celeris1 $0.2 / M input tokens $0.7 / M out",
+              "model": "Celeris-1"
+            },
+            {
+              "item": "Celeris-1.1 Decision 输入",
+              "value": 0.004,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "quest format as other decision models. See Celeris1 Decision . How is Celeris1.1 Decision billed? OPEN $0.004 per mil",
+              "model": "Celeris-1.1"
+            }
+          ],
+          "contentSha256": "bc384b6e3198e7aaa66db24041a260863384a4f9012c43870df431a67dce33af"
+        },
+        {
+          "kind": "api_pricing",
+          "url": "https://docs.celeris.ai/pricing",
+          "label": "文档版同价表（含缓存价）",
+          "lang": "en",
+          "checkedAt": "2026-11-05T10:31:46.233Z",
+          "httpStatus": 200,
+          "contentSha256": "30b7b4023cd6c3c895e4501d5c8fbc937e7457bdaa6997c7c9875afafaadd230"
+        }
+      ],
+      "note": "Enterprise 档为定制报价（Contact sales），无公开数字。"
+    },
+    {
+      "id": "apodex",
+      "name": "Apodex",
+      "upstreamCreators": [
+        "Apodex"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://platform.apodex.ai/docs/pricing",
+          "label": "官方文档定价页",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:47.015Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Apodex 1.1 输入",
+              "value": 0.3,
+              "unit": "USD_PER_1M_INPUT_TOKENS",
+              "quote": "apodex1.1 397B 旗舰模型。在长文档与复杂任务上具备最强的推理与指令遵循能力。 $0.30 $0.03 $3.00",
+              "model": "apodex-1.1"
+            },
+            {
+              "item": "Apodex 1.1 缓存输入",
+              "value": 0.03,
+              "unit": "USD_PER_1M_CACHE_READ_TOKENS",
+              "quote": "apodex1.1 397B 旗舰模型。在长文档与复杂任务上具备最强的推理与指令遵循能力。 $0.30 $0.03 $3.00 全员可用 ",
+              "model": "apodex-1.1"
+            },
+            {
+              "item": "Apodex 1.1 输出",
+              "value": 3,
+              "unit": "USD_PER_1M_OUTPUT_TOKENS",
+              "quote": "apodex1.1 397B 旗舰模型。在长文档与复杂任务上具备最强的推理与指令遵循能力。 $0.30 $0.03 $3.00 全员可用 Apo",
+              "model": "apodex-1.1"
+            },
+            {
+              "item": "Web search 托管工具调用",
+              "value": 5,
+              "unit": "USD_PER_1K_CALLS",
+              "quote": "rch 快速、可溯源的研究，在全部可用知识中查找、比对并综合，形成清晰、可执行的情报。 $5.00 $20.00 全员可用 Deep Solve 1.1 apodex11deepsolve 在检索到的",
+              "model": "web search"
+            }
+          ],
+          "contentSha256": "8963bb55c30d53b9a590736a850a0d01159e9d46dfa8c3623c3bf58510bbd3d6"
+        }
+      ],
+      "note": "Deep Research / Deep Solve 档额外按工具调用计费（web search $5 / web fetch $6 / code sandbox $90 每千次）；Deep Discover 为 Preview，需申请 Apodex Frontier Program。"
+    },
+    {
+      "id": "motif",
+      "name": "Motif Technologies",
+      "upstreamCreators": [
+        "Motif Technologies"
+      ],
+      "sources": [
+        {
+          "kind": "subscription_plan",
+          "url": "https://motif.io/pricing",
+          "label": "官方订阅套餐页",
+          "lang": "en",
+          "primary": true,
+          "checkedAt": "2026-11-05T10:31:47.495Z",
+          "httpStatus": 200,
+          "prices": [
+            {
+              "item": "Motif Design Business 档",
+              "value": 150,
+              "unit": "USD_PER_MONTH_PER_ACTIVE_USER",
+              "quote": "Business For small to medium teams designing together. From $150 /month per ",
+              "model": "Business"
+            },
+            {
+              "item": "Motif Review Pro 档",
+              "value": 25,
+              "unit": "USD_PER_SEAT_PER_MONTH",
+              "quote": "her, all in one place. Pro For individuals and small teams reviewing together. $25 /seat/m",
+              "model": "Pro"
+            }
+          ],
+          "contentSha256": "617b6e8a101fd305f17b9a5d3cda5f60be77023781161994cdcd252e4e7118c4"
+        }
+      ],
+      "note": "AEC/BIM 软件厂商 Motif（motif.io）。Motif Design 只有 Business（$150/活跃用户/月起）与 Enterprise（定制）两档；Motif Review 有 Pro $25/席位/月与 14 天试用。按席位订阅的 SaaS，不是 token 计价模型厂商。"
+    },
+    {
+      "id": "nex-agi",
+      "name": "Nex AGI",
+      "upstreamCreators": [
+        "Nex AGI"
+      ],
+      "sources": [
+        {
+          "kind": "api_pricing",
+          "url": "https://api.nex-agi.com/pricing",
+          "label": "NorthGate 平台定价页",
+          "lang": "zh",
+          "checkedAt": "2026-11-05T10:31:48.082Z",
+          "httpStatus": 200,
+          "contentSha256": "5a8af1c206f243bd816606060b2ce2bacd326c888376abd5ac1b87c8f9c6b629"
+        }
+      ],
+      "note": "页面为 SPA，/api/pricing 返回 {\"data\":[],\"group_ratio\":{}}（公开价目为空），实际价目需登录，故未抄录任何价格。第三方 OpenRouter 上的报价非官方来源，不登记。另注 nexa.ai 已 301 到 Qualcomm AI Hub（无公开定价页）。"
+    },
+    {
+      "id": "sktelecom",
+      "name": "SK Telecom",
+      "upstreamCreators": [
+        "SK Telecom"
+      ],
+      "sources": [
+        {
+          "kind": "model_doc",
+          "url": "https://sktelecom.github.io/en/project/axllm/",
+          "label": "A.X LLM 系列官方说明页",
+          "lang": "en",
+          "checkedAt": "2026-11-05T10:31:48.224Z",
+          "httpStatus": 200,
+          "contentSha256": "a0933f844d18d4523eb82e6131f2d8a1a8db9f9817f9af81449498ecf88b4fc7"
+        }
+      ],
+      "note": "A.X K2 / K1 / 4.0 / 3.1 以 Apache-2.0 开源，可免费商用（不是计价条目，故未记价格）。未找到公开 token 价目：自家推理服务 A.Dot、企业 AI 方案与 GPUaaS 均为报价制。"
+    }
+  ]
+}
