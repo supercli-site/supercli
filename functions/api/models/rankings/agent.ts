@@ -36,7 +36,8 @@ export async function onRequest({ request }: { request: Request }): Promise<Resp
   try {
     const response = await fetch(upstream, {
       headers: { Accept: "application/json" },
-      redirect: "error",
+      // workerd 不支持 redirect: "error"；manual + !ok 把 3xx 一并判为上游不可用。
+      redirect: "manual",
       signal: AbortSignal.timeout(12_000),
     });
     if (!response.ok) return json({ error: "Rankings source unavailable" }, 502);
