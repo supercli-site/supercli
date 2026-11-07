@@ -1,6 +1,6 @@
 /** 构建产物验收：静态页面、语言标记、分享卡片与机器索引不可缺失。 */
 import assert from "node:assert/strict";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 const read = (path) => readFileSync(resolve("dist", path), "utf8");
 const snapshot = JSON.parse(read("catalog.json"));
@@ -40,7 +40,9 @@ for (const url of paths) {
     file,
   );
   assert(
-    html.includes(`property="og:image" content="https://supercli.site/${card}"`),
+    html.includes(
+      `property="og:image" content="https://supercli.site/${card}"`,
+    ),
     file,
   );
   for (const script of html.matchAll(
@@ -54,6 +56,19 @@ for (const url of paths) {
     assert(existsSync(resolve("dist", asset[1].slice(1))), asset[1]);
 }
 assert.match(read("llms.txt"), /Machine-readable catalog/);
+// 补充发现入口不能指向未构建的页面；数据文件则必须真实存在。
+const publicPaths = new Set(paths.map((url) => url.pathname));
+for (const match of read("llms.txt").matchAll(
+  /\]\((https:\/\/supercli\.site\/[^)]*)\)/g,
+)) {
+  const url = new URL(match[1]);
+  const target = resolve("dist", url.pathname.slice(1));
+  assert(
+    publicPaths.has(url.pathname) ||
+      (existsSync(target) && statSync(target).isFile()),
+    `llms.txt links to missing page or file: ${url.pathname}`,
+  );
+}
 assert(!JSON.stringify(snapshot).includes("locallyInstalled"));
 // 两种语言的分享卡都必须是真实 PNG，社交平台不支持 SVG。
 const pngHeader = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
