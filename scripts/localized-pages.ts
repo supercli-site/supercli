@@ -142,6 +142,11 @@ function structuredData(
   return {
     ...base,
     "@type": "CollectionPage",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "SuperCLI",
+      url: origin + localizedPath("/", language),
+    },
     mainEntity: {
       "@type": "ItemList",
       numberOfItems: catalog.length,
