@@ -130,4 +130,4 @@
 
 改完可以再跑一次质检对比分数 —— 质检历史会画出曲线。
 
-> 本报告由 [Scorecard 开源项目质检](https://scorecard.webkubor.online) 生成，任何公开仓库都能免费跑一次。
+> 本报告由 [Scorecard 开源项目质检](https://scorecard.supercli.site) 生成，任何公开仓库都能免费跑一次。

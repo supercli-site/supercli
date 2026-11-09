@@ -6,7 +6,7 @@ import { escapeHtml } from "./escape";
 export function scorecardUrl(item: Pick<Entry, "repo">): string | null {
   if (!item.repo || !/^[a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+$/.test(item.repo))
     return null;
-  return `https://scorecard.webkubor.online/#/report/${item.repo.split("/").map(encodeURIComponent).join("/")}`;
+  return `https://scorecard.supercli.site/#/report/${item.repo.split("/").map(encodeURIComponent).join("/")}`;
 }
 /** 详情中的辅助决策入口；质量报告不混入热度排名。 */
 export function scorecardMarkup(item: Entry): string {

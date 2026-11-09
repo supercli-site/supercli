@@ -128,4 +128,4 @@
 标着"自动判不了"的几项，你打开站点后给我你的结论。
 ```
 
-> 本报告由 [Scorecard 开源项目质检](https://scorecard.webkubor.online) 生成，任何公开 URL 都能免费跑一次。
+> 本报告由 [Scorecard 开源项目质检](https://scorecard.supercli.site) 生成，任何公开 URL 都能免费跑一次。

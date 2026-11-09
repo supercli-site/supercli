@@ -1,6 +1,6 @@
 # Scorecard 项目质检汇总
 
-对象：webkubor/supercli 与 https://supercli.site/ 。工具：用户自己的 webkubor/scorecard，CLI 源码 48c5089，默认实例 https://scorecard.webkubor.online 。分别使用 github / page 两套引擎，整改后均带 --fresh，不混合计分。
+对象：webkubor/supercli 与 https://supercli.site/ 。工具：用户自己的 webkubor/scorecard，CLI 源码 48c5089，默认实例 https://scorecard.supercli.site 。分别使用 github / page 两套引擎，整改后均带 --fresh，不混合计分。
 
 | 目标 | 整改前 | 发布后 | 原始报告 |
 | --- | ---: | ---: | --- |

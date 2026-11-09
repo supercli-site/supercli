@@ -7,7 +7,7 @@ test("Scorecard links bind the current GitHub repository and reject invalid targ
   const item = catalog.find((item) => item.id === "wrangler");
   assert.equal(
     scorecardUrl(item),
-    "https://scorecard.webkubor.online/#/report/cloudflare/workers-sdk",
+    "https://scorecard.supercli.site/#/report/cloudflare/workers-sdk",
   );
   assert.match(scorecardMarkup(item), /整个仓库/);
   assert.match(scorecardMarkup(item), /noopener noreferrer/);
