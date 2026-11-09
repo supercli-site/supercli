@@ -4,7 +4,7 @@
 
 项目类型 `app` · 0 star · 生成于 2026-10-20 18:51
 
-九维度标准来自 [project-maturity-audit](https://github.com/webkubor/scorecard/tree/main/skills/project-maturity-audit)：
+九维度标准来自 [project-maturity-audit](https://github.com/supercli-site/scorecard/tree/main/skills/project-maturity-audit)：
 评的不是「代码好不好」，是「陌生人会不会在 10 秒内 star、安装、信任它」。
 
 ## 记分卡
