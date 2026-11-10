@@ -119,6 +119,15 @@
 .pricing-table tbody tr:last-child td {
   border-bottom: 0;
 }
+/* 来源标题：每个定价来源各一张表，表头带官方链接与核实日期。 */
+.pricing-source {
+  margin: 18px 0 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.pricing-source a {
+  color: inherit;
+}
 /* 方向词是次要信息：与模型名之间留出间距，并压低对比度。 */
 .pricing-direction {
   display: inline-block;

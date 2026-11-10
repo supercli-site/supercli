@@ -71,18 +71,36 @@ function scaleOf(unit: string): { currency: PriceRow["currency"]; scale: string 
   return { currency: null, scale: "" };
 }
 
+/** 一个定价来源：官方链接、显示名与核实时间。 */
+export interface PricingSource {
+  readonly url: string;
+  readonly label: string;
+  readonly labelEn: string | null;
+  readonly checkedAt: string | null;
+}
+
 /**
- * 取某个厂商登记的按量价格行。
+ * 取某个厂商登记的按量价格行，**按来源分组**。
+ *
+ * 🔴 为什么按来源分组（2026-11-11 实测）：
+ *   同一个厂商常有多个定价页 —— DeepSeek 就同时有人民币站与美元站
+ *   （MiniMax、Kimi、阿里云同理）。把它们的行合进一张表，
+ *   就会出现「¥4.5 和 $0.15 混在一张表里」，用户无从比较。
+ *   每个来源各出一张表，表头带来源名与官方链接，币种自然不混。
  *
  * @param vendorId 目录条目里的 pricingSourceId
  * @param kind 只取该类别的来源（api_pricing = 按量 API 价格；订阅类不混进来）
  */
-export function priceRows(vendorId: string, kind = "api_pricing"): PriceRow[] {
+export function priceGroups(
+  vendorId: string,
+  kind = "api_pricing",
+): { rows: PriceRow[]; source: PricingSource }[] {
   const vendor = registry.vendors.find((entry) => entry.id === vendorId);
   if (!vendor) return [];
-  const rows: PriceRow[] = [];
+  const groups: { rows: PriceRow[]; source: PricingSource }[] = [];
   for (const source of vendor.sources) {
     if (source.kind !== kind) continue;
+    const rows: PriceRow[] = [];
     for (const price of source.prices ?? []) {
       const { currency, scale } = scaleOf(price.unit);
       rows.push({
@@ -99,15 +117,30 @@ export function priceRows(vendorId: string, kind = "api_pricing"): PriceRow[] {
         noteEn: price.noteEn ?? null,
       });
     }
+    if (!rows.length) continue;
+    groups.push({
+      rows,
+      source: {
+        url: source.url,
+        label: source.label,
+        labelEn: source.labelEn ?? null,
+        checkedAt: source.checkedAt ?? null,
+      },
+    });
   }
-  return rows;
+  return groups;
+}
+
+/** 取某个厂商的按量价格行（不分来源；给只需要行的调用方用）。 */
+export function priceRows(vendorId: string, kind = "api_pricing"): PriceRow[] {
+  return priceGroups(vendorId, kind).flatMap((group) => group.rows);
 }
 
 /** 该厂商的官方定价链接与核实时间（渲染成「来源」脚注）。 */
 export function pricingSource(
   vendorId: string,
   kind = "api_pricing",
-): { url: string; label: string; labelEn: string | null; checkedAt: string | null } | null {
+): PricingSource | null {
   const vendor = registry.vendors.find((entry) => entry.id === vendorId);
   if (!vendor) return null;
   const source =

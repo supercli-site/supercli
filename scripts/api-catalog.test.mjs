@@ -9,7 +9,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { catalog } from "../src/catalog.ts";
 import { apiEntryFor } from "../src/api-entry.ts";
-import { priceRows, pricingSource } from "../src/pricing-table.ts";
+import { priceGroups, priceRows, pricingSource } from "../src/pricing-table.ts";
 import { pricingTableMarkup } from "../src/pricing-markup.ts";
 import { cardMetrics } from "../src/tool-metrics.ts";
 import { toolMarkup, faqs } from "./tool-markup.ts";
@@ -90,6 +90,23 @@ test("API 卡片显示接入端点与计费方式，不显示 npm 下载量与�
     assert.ok(metrics.includes("计费方式"), `${item.id} 卡片缺计费方式`);
     assert.ok(!metrics.includes("近30天下载"), `${item.id} 卡片不该显示 npm 下载量`);
     assert.ok(!metrics.includes("仓库更新"), `${item.id} 卡片不该显示仓库更新`);
+  }
+});
+
+test("同一张价格表内不得混币种（每个定价来源各出一张表）", () => {
+  // 🔴 2026-11-11 实测踩坑：DeepSeek 同时有人民币站与美元站，
+  //   两边的行合进一张表就变成「¥4.5 和 $0.15 并排」，用户无从比较。
+  for (const item of apiEntries) {
+    for (const group of priceGroups(item.api.pricingSourceId)) {
+      const currencies = new Set(
+        group.rows.map((row) => row.currency ?? row.unit),
+      );
+      assert.equal(
+        currencies.size,
+        1,
+        `${item.id} 的一张表里混了多种计价口径：${[...currencies].join(", ")}`,
+      );
+    }
   }
 });
 
