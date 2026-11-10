@@ -656,5 +656,12 @@
     "curatedBy": "webkubor",
     "recommendedBy": "museav",
     "evidence": "https://github.com/webkubor/supercli/issues/7"
+  },
+  {
+    "id": "gemini-api",
+    "addedAt": "2026-11-10T15:20:00+08:00",
+    "curatedBy": "webkubor",
+    "recommendedBy": null,
+    "evidence": "https://github.com/webkubor/supercli/commit/bdb373e333daee1bcfb3e4adf27c7308beb62f91"
   }
 ]

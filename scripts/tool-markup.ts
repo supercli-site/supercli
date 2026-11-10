@@ -11,6 +11,7 @@ import { guideIconMarkup } from "../src/tool-icon.ts";
 import { ambientGridMarkup } from "../src/ambient.ts";
 import { commandMarkup } from "../src/command-markup.ts";
 import { translate, type Language } from "../src/translations.ts";
+import { apiEntryFor } from "../src/api-entry.ts";
 import { guides, guideText } from "./guide-content.ts";
 const descriptions: Readonly<Record<string, string>> = english;
 const categoryNames: Readonly<Record<string, string>> = categories;
@@ -83,7 +84,7 @@ function terminalMarkup(item: ReviewSubject, language: Language): string {
  *      端点与价格都带来源链接与核实日期，不在这里二次编造。
  */
 function apiMarkup(item: ReviewSubject, language: Language): string {
-  const api = item.api;
+  const api = apiEntryFor(item, language);
   if (!api)
     return `<p class="terminal-empty">${copy(language, "本站未收录该 API 的接入信息，请以官方文档为准。", "No connection details are listed for this API; follow the official documentation.")}</p>`;
   const rows: Array<[string, string]> = [
@@ -114,11 +115,14 @@ export function faqs(
         `How do I get started with ${name}?`,
       )
     : copy(language, `怎么安装 ${name}？`, `How do I install ${name}?`);
-  const firstAnswer = isApi
+  // 🔴 接入信息是**数据**（协议/鉴权/计费是中文条目里的中文值），
+  //   翻译机制只覆盖代码里的静态片段 —— 英文页必须取英文版数据。
+  const api = apiEntryFor(item, language);
+  const firstAnswer = isApi && api
     ? copy(
         language,
-        `在官方控制台签发 API Key，请求 ${item.api!.endpoint}（${item.api!.protocol}），鉴权方式为 ${item.api!.auth}。计费为${item.api!.pricing}。接入前请在官方文档确认限额与费用前提。`,
-        `Issue an API key from the official console, call ${item.api!.endpoint} (${item.api!.protocol}), and authenticate with ${item.api!.auth}. Billing is ${item.api!.pricing}. Check rate limits and costs in the official documentation before you start.`,
+        `在官方控制台签发 API Key，请求 ${api.endpoint}（${api.protocol}），鉴权方式为 ${api.auth}。计费为${api.pricing}。接入前请在官方文档确认限额与费用前提。`,
+        `Issue an API key from the official console, call ${api.endpoint} (${api.protocol}), and authenticate with ${api.auth}. Billing is ${api.pricing}. Check rate limits and costs in the official documentation before you start.`,
       )
     : item.install
     ? copy(

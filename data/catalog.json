@@ -1216,5 +1216,25 @@
     "docs": "https://github.com/webkubor/claude-usage-statusline#readme",
     "icon": "claude-usage-statusline.png",
     "maintainerType": "community"
+  },
+  {
+    "id": "gemini-api",
+    "name": "Gemini API",
+    "vendor": "Google",
+    "category": "api",
+    "repo": null,
+    "description": "Google Gemini 的按量付费 API：拿 API Key 直接调用模型，不依赖任何 CLI 或订阅额度。",
+    "install": null,
+    "docs": "https://ai.google.dev/gemini-api/docs",
+    "icon": "google.png",
+    "maintainerType": "vendor",
+    "api": {
+      "endpoint": "https://generativelanguage.googleapis.com/v1beta",
+      "protocol": "REST（另提供 OpenAI 兼容端点）",
+      "auth": "API Key（Google AI Studio 签发）",
+      "pricing": "按 token 计费，无月费",
+      "sdk": "官方 SDK：Python / JavaScript / Go / Java；也可用任意 HTTP 客户端直连",
+      "priceNote": "Gemini 3.8 Flash 每百万 token 输入 $0.75、输出 $3.75（促销期至 2026-12-31，之后输入 $1.50、输出 $7.50）—— 核实日期 2026-11-05，来源 AI Studio 定价页"
+    }
   }
 ]

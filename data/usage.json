@@ -191,6 +191,7 @@
     "dyt-ashare-cli": null,
     "facet": null,
     "reel-kit": null,
-    "claude-usage-statusline": null
+    "claude-usage-statusline": null,
+    "gemini-api": null
   }
 }

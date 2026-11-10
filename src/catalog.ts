@@ -8,15 +8,9 @@ import rawCategories from "../data/categories.json";
 const categories = Object.fromEntries(
   Object.entries(rawCategories).map(([key, label]) => [key, t(label)]),
 );
-/** 纯 API 服务的接入与计费信息；只有 category=api 的条目带这个对象。 */
-export interface ApiEntry {
-  readonly endpoint: string;
-  readonly protocol: string;
-  readonly auth: string;
-  readonly pricing: string;
-  readonly sdk?: string;
-  readonly priceNote?: string;
-}
+import { apiEntryFor, type ApiEntry } from "./api-entry";
+export { apiEntryFor };
+export type { ApiEntry };
 /** 公开目录条目；非 GitHub CLI 使用官方文档，不虚构仓库。 */
 export interface Entry {
   readonly id: string;
