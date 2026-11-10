@@ -88,3 +88,11 @@ Google 的 AI Overviews / AI Mode 沿用 SEO 基础要求，不要求专用 AI �
 - 构建验收增加 llms.txt 所有本站链接的存在性检查：内容页必须在站点地图中，数据文件必须在构建目录中真实存在。
 - GSC 下钻确认：现有 3 个“已抓取 - 尚未编入索引”示例是 sitemap.xml、catalog.json、llms.txt，并非工具页。它们是发现或检索文件，不按工具页面补内容或重复申请索引；当前 194 页索引数仍是滞后的索引报告快照，不能视为全量站点地图已收录。
 - [X 草稿](promotion/2026-11-07-x-draft.md) 已准备，只保存、不发布。部署与真实页面验收以本轮交付回执为准。
+
+## 2026-11-10：纯 API 页面使用 WebAPI 元信息
+
+- 线上正文已按接入端点、鉴权和计费方式展示 API 服务；但 6 个纯 API 条目的中英文 JSON-LD 仍统一标记为 SoftwareApplication，并带应用分类字段，与页面实际使用形态不一致。
+- 按 [Schema.org WebAPI](https://schema.org/WebAPI) 定义，API 条目改用 WebAPI 类型与 documentation 文档链接；普通 CLI 仍用 SoftwareApplication。文档 URL 继续取自 data/catalog.json，不另建数据副本；不把 API 描述成可安装应用，也不新增价格 Offer。
+- 此修正只对齐机器语义，不代表 Google 支持特定富结果，也不保证收录、排序或 AI 引用。价格及其巡检登记表没有修改。
+- GSC 回读：索引报告更新至 2026-11-06，197 个已编入、173 个未编入（166 个适当 canonical 备用页、1 个重定向、6 个已抓取未索引）。这是 Google 报告快照，不能等同于当前站点地图或新 API 页的全部收录。
+- 验证覆盖全部目录条目的双语实体类型、原始文档链接和 API/软件字段分流；线上正文、canonical 与关键链接在部署后另行验收。

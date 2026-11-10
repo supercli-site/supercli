@@ -17,8 +17,44 @@ import { detailMarkup } from "../src/html.ts";
 import rawCategories from "../data/categories.json" with { type: "json" };
 import rawSchema from "../data/catalog.schema.json" with { type: "json" };
 import englishApi from "../data/api.en.json" with { type: "json" };
+import { localizedPage, pageSource } from "./localized-pages.ts";
 
 const apiEntries = catalog.filter((item) => item.category === "api");
+
+test("双语机器元信息区分 WebAPI 与可安装应用，文档指向目录真源", () => {
+  for (const item of catalog) {
+    const path = `/tools/${item.id}/`;
+    const template = readFileSync(
+      new URL(`../${pageSource(path)}`, import.meta.url),
+      "utf8",
+    );
+    for (const language of ["zh", "en"]) {
+      const html = localizedPage(template, path, language);
+      const page = [
+        ...html.matchAll(
+          /<script type="application\/ld\+json">(.*?)<\/script>/gs,
+        ),
+      ]
+        .map((match) => JSON.parse(match[1]))
+        .find((data) => data["@type"] === "WebPage");
+      const entity = page.mainEntity;
+      assert.equal(entity.url, item.docs);
+      assert.equal(
+        entity["@type"],
+        item.category === "api" ? "WebAPI" : "SoftwareApplication",
+      );
+      if (item.category === "api") {
+        assert.equal(entity.documentation, item.docs);
+        assert(!("applicationCategory" in entity));
+        assert(!("downloadUrl" in entity));
+        assert(!("offers" in entity));
+      } else {
+        assert.equal(entity.applicationCategory, "DeveloperApplication");
+        assert(!("documentation" in entity));
+      }
+    }
+  }
+});
 
 test("目录里存在「API 服务」品类，且有实际条目", () => {
   assert.ok("api" in rawCategories, "categories.json 缺少 api 分类");

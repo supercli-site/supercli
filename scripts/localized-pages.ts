@@ -131,11 +131,13 @@ function structuredData(
       ...base,
       "@type": "WebPage",
       mainEntity: {
-        "@type": "SoftwareApplication",
+        "@type": item.category === "api" ? "WebAPI" : "SoftwareApplication",
         name: translate(item.name, language),
         description,
         url: item.docs,
-        applicationCategory: "DeveloperApplication",
+        ...(item.category === "api"
+          ? { documentation: item.docs }
+          : { applicationCategory: "DeveloperApplication" }),
       },
     };
   if (path !== "/") return { ...base, "@type": "WebPage" };
