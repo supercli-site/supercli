@@ -8,6 +8,15 @@ import rawCategories from "../data/categories.json";
 const categories = Object.fromEntries(
   Object.entries(rawCategories).map(([key, label]) => [key, t(label)]),
 );
+/** 纯 API 服务的接入与计费信息；只有 category=api 的条目带这个对象。 */
+export interface ApiEntry {
+  readonly endpoint: string;
+  readonly protocol: string;
+  readonly auth: string;
+  readonly pricing: string;
+  readonly sdk?: string;
+  readonly priceNote?: string;
+}
 /** 公开目录条目；非 GitHub CLI 使用官方文档，不虚构仓库。 */
 export interface Entry {
   readonly id: string;
@@ -21,6 +30,15 @@ export interface Entry {
   readonly icon: string;
   readonly locallyInstalled?: boolean;
   readonly maintainerType: "vendor" | "community";
+  /**
+   * 纯 API 服务的接入信息。
+   *
+   * 🔴 为什么要单列一个字段而不是塞进 description：
+   *   「装进终端」和「按量调接口」是两种不同的使用形态，
+   *   用户的判断依据也不同（前者看安装命令与仓库热度，后者看端点、鉴权与计费）。
+   *   目录页与详情页按 category=api 走各自的呈现，不混在一张「安装方式」表里。
+   */
+  readonly api?: ApiEntry;
 }
 /** 指标只表示仓库关注度，无可比数据的条目为 null。 */
 export interface Metric {

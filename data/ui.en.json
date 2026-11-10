@@ -469,5 +469,15 @@
   "· 品牌归各权利人所有": "· Brands belong to their respective owners",
   "官方价": "Official price",
   "官方套餐": "Official plan",
-  "Agentic Index 衡量工具调用与端到端任务完成能力；单任务成本为加权基准任务成本（USD/任务），按厂商按量 API 计价口径统计，订阅制套餐另计。厂商名旁的「官方价」「官方套餐」指向官方定价页，可自行核对上游数字。数值可能为空，表示该模型当期无该指标数据，不表示 0。": "Agentic Index measures tool use and end-to-end task completion; cost per task is a weighted baseline task cost (USD/task) counted at each vendor's pay-as-you-go API pricing, while subscription plans are billed separately. The “official price” and “official plan” links next to a vendor point at its official pricing page so you can check the upstream numbers yourself. Empty values mean the model has no such metric this period, not zero."
+  "Agentic Index 衡量工具调用与端到端任务完成能力；单任务成本为加权基准任务成本（USD/任务），按厂商按量 API 计价口径统计，订阅制套餐另计。厂商名旁的「官方价」「官方套餐」指向官方定价页，可自行核对上游数字。数值可能为空，表示该模型当期无该指标数据，不表示 0。": "Agentic Index measures tool use and end-to-end task completion; cost per task is a weighted baseline task cost (USD/task) counted at each vendor's pay-as-you-go API pricing, while subscription plans are billed separately. The “official price” and “official plan” links next to a vendor point at its official pricing page so you can check the upstream numbers yourself. Empty values mean the model has no such metric this period, not zero.",
+  "接入方式": "Getting started",
+  "接入端点": "Endpoint",
+  "协议": "Protocol",
+  "鉴权方式": "Authentication",
+  "计费方式": "Pricing",
+  "SDK": "SDK",
+  "API 服务": "API services",
+  "回到目录": "Back to the directory",
+  "价格与计费规则以官方定价页为准；本页只记录核实过的快照，不代替结算账单。": "Prices and billing rules follow the official pricing page; this page records a verified snapshot and does not replace your invoice.",
+  "本站未收录该 API 的接入信息，请以官方文档为准。": "No connection details are listed for this API; follow the official documentation."
 }

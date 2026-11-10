@@ -33,7 +33,7 @@
         "maxLength": 60
       },
       "category": {
-        "enum": ["cloud", "ai", "dev", "terminal", "data", "media", "security"]
+        "enum": ["cloud", "ai", "dev", "terminal", "data", "media", "security", "api"]
       },
       "repo": {
         "anyOf": [
@@ -77,6 +77,42 @@
       },
       "maintainerType": {
         "enum": ["vendor", "community"]
+      },
+      "api": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "纯 API 服务条目的接入与计费信息；category=api 时必填，CLI 条目不带此字段。",
+        "required": ["endpoint", "protocol", "auth", "pricing"],
+        "properties": {
+          "endpoint": {
+            "type": "string",
+            "pattern": "^https://[^\\s<>\"']+$"
+          },
+          "protocol": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 60
+          },
+          "auth": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 60
+          },
+          "pricing": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 200
+          },
+          "sdk": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 120
+          },
+          "priceNote": {
+            "type": "string",
+            "maxLength": 200
+          }
+        }
       }
     }
   }

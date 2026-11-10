@@ -69,14 +69,58 @@ function terminalMarkup(item: ReviewSubject, language: Language): string {
   );
   return `<div class="terminal-window"><div class="terminal-bar" aria-hidden="true"><span class="terminal-dots"><i></i><i></i><i></i></span><span class="terminal-title">${copy(language, "终端", "Terminal")}</span></div><div class="terminal-body"><code class="terminal-line"><span class="terminal-prompt">$</span>${commandMarkup(item.install)}<span class="terminal-caret" aria-hidden="true"></span></code><button class="copy terminal-copy" data-copy-command="${escape(item.install)}" aria-label="${label}"><span class="terminal-copy-icon" aria-hidden="true"><i data-lucide="copy"></i><svg class="terminal-copy-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="terminal-copy-label">${copy(language, "复制", "Copy")}</span></button></div></div>`;
 }
+
+/**
+ * 纯 API 服务的「接入方式」区块。
+ *
+ * 🔴 为什么 API 服务不共用「安装方式」那张表（2026-11-10）：
+ *   两者是**不同的使用形态**，用户的判断依据也不同：
+ *   · CLI：装什么命令、仓库多热、怎么装
+ *   · API：打到哪个端点、怎么鉴权、**怎么计费**
+ *   混在一张表里会让「按量付费」这种最关键的差别被埋掉。
+ *
+ *   🔴 数据只来自目录条目已核实的字段（data/catalog.json 的 api 对象），
+ *      端点与价格都带来源链接与核实日期，不在这里二次编造。
+ */
+function apiMarkup(item: ReviewSubject, language: Language): string {
+  const api = item.api;
+  if (!api)
+    return `<p class="terminal-empty">${copy(language, "本站未收录该 API 的接入信息，请以官方文档为准。", "No connection details are listed for this API; follow the official documentation.")}</p>`;
+  const rows: Array<[string, string]> = [
+    [copy(language, "接入端点", "Endpoint"), api.endpoint],
+    [copy(language, "协议", "Protocol"), api.protocol],
+    [copy(language, "鉴权方式", "Authentication"), api.auth],
+    [copy(language, "计费方式", "Pricing"), api.pricing],
+  ];
+  if (api.sdk) rows.push([copy(language, "SDK", "SDK"), api.sdk]);
+  return `<dl class="tool-facts">${rows
+    .map(([term, value]) => `<div><dt>${escape(term)}</dt><dd>${escape(value)}</dd></div>`)
+    .join("")}</dl>${api.priceNote ? `<p class="tool-install-note">${escape(api.priceNote)}</p>` : ""}<p class="tool-install-note">${copy(language, "价格与计费规则以官方定价页为准；本页只记录核实过的快照，不代替结算账单。", "Prices and billing rules follow the official pricing page; this page records a verified snapshot and does not replace your invoice.")}</p>`;
+}
 /** 页面可见 FAQ 与 FAQPage 结构化数据共用同一组问答，不各写一份。 */
 export function faqs(
-  item: Pick<ReviewSubject, "id" | "name" | "install">,
+  item: Pick<ReviewSubject, "id" | "name" | "install" | "category" | "api">,
   language: Language,
 ) {
   const metric = repositories[item.id];
   const name = translate(item.name, language);
-  const install = item.install
+  const isApi = item.category === "api" && item.api;
+  // 🔴 API 服务的第一问是「怎么接入」，不是「怎么安装」：
+  //   两者的用户动作完全不同（拿 Key 调端点 vs 装进终端）。
+  const first = isApi
+    ? copy(
+        language,
+        `怎么接入 ${name}？`,
+        `How do I get started with ${name}?`,
+      )
+    : copy(language, `怎么安装 ${name}？`, `How do I install ${name}?`);
+  const firstAnswer = isApi
+    ? copy(
+        language,
+        `在官方控制台签发 API Key，请求 ${item.api!.endpoint}（${item.api!.protocol}），鉴权方式为 ${item.api!.auth}。计费为${item.api!.pricing}。接入前请在官方文档确认限额与费用前提。`,
+        `Issue an API key from the official console, call ${item.api!.endpoint} (${item.api!.protocol}), and authenticate with ${item.api!.auth}. Billing is ${item.api!.pricing}. Check rate limits and costs in the official documentation before you start.`,
+      )
+    : item.install
     ? copy(
         language,
         `官方安装命令：${item.install}。执行前请在官方文档确认系统、运行环境、账号与费用前提。`,
@@ -100,8 +144,8 @@ export function faqs(
       );
   return [
     {
-      question: copy(language, `怎么安装 ${name}？`, `How do I install ${name}?`),
-      answer: install,
+      question: first,
+      answer: firstAnswer,
     },
     {
       question: copy(
@@ -154,10 +198,10 @@ export function toolMarkup(item: ReviewSubject, language: Language): string {
       <div class="tool-aside-head">${ambientGridMarkup(language)}<div class="tool-aside-icon">${guideIconMarkup(item)}</div><p class="eyebrow">${escape(translate(item.vendor, language))} / ${category}</p><h1>${escape(translate(item.name, language))}</h1><p class="intro">${escape(language === "en" ? descriptions[item.id] : item.description)}</p><div class="guide-tags"><span class="guide-tag">${copy(language, item.maintainerType === "vendor" ? "厂商官方" : "社区项目", item.maintainerType === "vendor" ? "Vendor maintained" : "Community maintained")}</span><span class="guide-tag">${escape(category)}</span>${metric ? `<span class="guide-tag guide-tag-metric">${escape(compact(metric.stars))} GitHub Stars</span>` : ""}</div></div>
       <dl class="tool-facts"><div><dt>${copy(language, "分类", "Category")}</dt><dd>${category}</dd></div><div><dt>${copy(language, "维护来源", "Maintenance source")}</dt><dd>${copy(language, item.maintainerType === "vendor" ? "厂商官方" : "社区项目", item.maintainerType === "vendor" ? "Vendor maintained" : "Community maintained")}</dd></div>${metric ? `<div><dt>${copy(language, "GitHub Stars", "GitHub stars")}</dt><dd>${escape(compact(metric.stars))} · ${copy(language, `快照 ${metrics.fetchedAt.slice(0, 10)}`, `snapshot ${metrics.fetchedAt.slice(0, 10)}`)}</dd></div>` : ""}</dl>
       <div class="tool-aside-actions"><a class="button primary" href="${escape(item.docs)}">${copy(language, "官方文档", "Official docs")} ↗</a>${item.repo ? `<a class="button" href="https://github.com/${escape(item.repo)}">${copy(language, "源码仓库", "Source repository")} ↗</a>` : ""}</div>
-      <a class="tool-aside-back" href="${directory}">← ${copy(language, "回到 CLI 目录", "Back to the directory")}</a>
+      <a class="tool-aside-back" href="${directory}">← ${copy(language, "回到目录", "Back to the directory")}</a>
     </aside>
     <div class="tool-main">
-  <section class="guide-section tool-install"><h2>${copy(language, "安装方式", "Installation")}</h2>${terminalMarkup(item, language)}<p class="tool-install-note">${copy(language, "安装前请阅读上方官方文档，确认系统、运行环境、账号与费用前提。目录收录不代表已在你的环境中验证安装。", "Read the official documentation above and check system, runtime, account, and cost requirements before installing. Catalog inclusion does not mean installation has been verified in your environment.")}</p></section>${faqMarkup(item, language)}
+  <section class="guide-section tool-install"><h2>${copy(language, item.category === "api" ? "接入方式" : "安装方式", item.category === "api" ? "Getting started" : "Installation")}</h2>${item.category === "api" ? apiMarkup(item, language) : terminalMarkup(item, language)}${item.category === "api" ? "" : `<p class="tool-install-note">${copy(language, "安装前请阅读上方官方文档，确认系统、运行环境、账号与费用前提。目录收录不代表已在你的环境中验证安装。", "Read the official documentation above and check system, runtime, account, and cost requirements before installing. Catalog inclusion does not mean installation has been verified in your environment.")}</p>`}</section>${faqMarkup(item, language)}
   <section class="guide-checklist tool-evidence"><h2>${copy(language, "收录与核验范围", "Inclusion and review scope")}</h2>${inclusionMarkup(item, language)}${evidence(item, language)}<a class="text-button" href="${path("/standards", language)}">${copy(language, "了解收录与核验标准", "Read our inclusion standards")} →</a></section>${relatedGuides(item, language)}
   <div class="guide-actions"><a class="button" href="${path(`/?tool=${encodeURIComponent(item.id)}#directory`, language)}">${copy(language, "查看交互详情与指标", "Open interactive details and metrics")} →</a><a class="button" href="${escape(share.href)}" target="_blank" rel="noopener noreferrer">${copy(language, "分享到 X", "Share on X")}</a><a class="button" href="${directory}">${copy(language, "探索全部工具", "Explore all tools")}</a></div>
     </div>
