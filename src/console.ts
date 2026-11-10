@@ -3,9 +3,9 @@
  * 路由：/、/en/
  * 数据来源：data/catalog.json 与 data/metrics.json，与目录使用同一套查询逻辑。
  */
-import { t, msg } from "./i18n";
+import { language, t, msg } from "./i18n";
 import { formatStars } from "./tool-metrics";
-import { queryEntries, catalog, stats, type Entry } from "./catalog";
+import { apiEntryFor, queryEntries, catalog, stats, type Entry } from "./catalog";
 import { escapeHtml as escape } from "./escape";
 import { consoleIconMarkup } from "./tool-icon";
 import { commandMarkup } from "./command-markup";
@@ -22,22 +22,31 @@ const MAX_RESULTS = 6;
 
 /** 复制按钮沿用终端窗口的图标翻转结构，与目录和工具页共用同一套反馈。 */
 function copyButtonMarkup(item: Entry): string {
-  const label = escape(msg`复制 ${item.name} 安装命令`);
+  // 🔴 API 服务没有「安装命令」—— 按量调接口的用户不会去复制一条命令，
+  //   按钮的语义要说清是打开详情（main.ts 里 install 为空时就是打开详情）。
+  const label = item.install
+    ? escape(msg`复制 ${item.name} 安装命令`)
+    : escape(msg`查看 ${item.name} 详情`);
   return `<button type="button" class="console-hit-copy" data-copy="${escape(item.id)}" aria-label="${label}"><span class="terminal-copy-icon" aria-hidden="true"><i data-lucide="copy"></i><svg class="terminal-copy-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="terminal-copy-label">${escape(t("复制"))}</span></button>`;
 }
 
 /** 单条命中结果：图标、名称、厂商、Stars 与安装命令。 */
 function resultMarkup(item: Entry): string {
   const metric = stats(item);
+  // 🔴 API 服务的「命令」位给**接入端点**（纯 API 面的关键信息），
+  //   而不是 CLI 的降级文案 —— 端点才是 API 用户要的那一行。
+  const api = apiEntryFor(item, language);
   const command = item.install
     ? commandMarkup(item.install)
+    : api
+    ? escape(api.endpoint)
     : escape(t("请查看官方文档"));
   return `<div class="console-hit">
     <span class="console-hit-icon">${consoleIconMarkup(item)}</span>
     <span class="console-hit-body">
       <a class="console-hit-name" href="/tools/${escape(item.id)}/" data-detail="${escape(item.id)}">${escape(t(item.name))}</a>
       <span class="console-hit-meta">${escape(t(item.vendor))} · ${metric ? `${escape(formatStars(metric.stars))} Stars` : escape(t("未计分"))}</span>
-      <code class="console-hit-command"><span class="console-prompt">$</span>${command}</code>
+      <code class="console-hit-command"><span class="console-prompt">${api && !item.install ? "→" : "$"}</span>${command}</code>
     </span>
     ${copyButtonMarkup(item)}
   </div>`;
