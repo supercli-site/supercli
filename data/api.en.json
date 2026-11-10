@@ -7,5 +7,45 @@
     "sdk": "Official SDKs: Python / JavaScript / Go / Java; any HTTP client works too",
     "priceNote": "Gemini 3.8 Flash is $0.75 input and $3.75 output per million tokens (promotional price through 2026-12-31, then $1.50 / $7.50) — verified 2026-11-05, source: AI Studio pricing page",
     "pricingSourceId": "google"
+  },
+  "anthropic-api": {
+    "endpoint": "https://api.anthropic.com",
+    "protocol": "REST (Messages API: POST /v1/messages)",
+    "auth": "API key",
+    "pricing": "Pay per token, no monthly fee",
+    "sdk": "Official SDKs: Python / TypeScript / Java / Go / C#; any HTTP client works too",
+    "pricingSourceId": "anthropic"
+  },
+  "openai-api": {
+    "endpoint": "https://api.openai.com/v1",
+    "protocol": "REST",
+    "auth": "API key (project keys supported)",
+    "pricing": "Pay per token, no monthly fee",
+    "sdk": "Official SDKs: Python / JavaScript / .NET / Java / Go; any HTTP client works too",
+    "pricingSourceId": "openai"
+  },
+  "xai-api": {
+    "endpoint": "https://api.x.ai/v1",
+    "protocol": "REST (OpenAI-compatible: point base_url at api.x.ai/v1)",
+    "auth": "API key",
+    "pricing": "Pay per token, no monthly fee",
+    "sdk": "Use the OpenAI SDK as is, with the base URL switched to xAI's",
+    "pricingSourceId": "spacexai"
+  },
+  "deepseek-api": {
+    "endpoint": "https://api.deepseek.com",
+    "protocol": "REST (OpenAI-compatible; an Anthropic-compatible path is available at /anthropic)",
+    "auth": "API key",
+    "pricing": "Pay per token, no monthly fee",
+    "sdk": "The OpenAI SDK and the Anthropic SDK both work as is",
+    "pricingSourceId": "deepseek"
+  },
+  "minimax-api": {
+    "endpoint": "https://api.minimax.chat/v1",
+    "protocol": "REST (OpenAI-compatible Chat Completions)",
+    "auth": "API key",
+    "pricing": "Pay per token, no monthly fee",
+    "sdk": "Use the OpenAI SDK as is, with the base URL switched to MiniMax's",
+    "pricingSourceId": "minimax"
   }
 }

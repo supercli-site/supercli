@@ -792,6 +792,11 @@
       "language": "Python",
       "license": "MIT"
     },
-    "gemini-api": null
+    "gemini-api": null,
+    "anthropic-api": null,
+    "openai-api": null,
+    "xai-api": null,
+    "deepseek-api": null,
+    "minimax-api": null
   }
 }

@@ -11,6 +11,7 @@ import { catalog } from "../src/catalog.ts";
 import { apiEntryFor } from "../src/api-entry.ts";
 import { priceRows, pricingSource } from "../src/pricing-table.ts";
 import { pricingTableMarkup } from "../src/pricing-markup.ts";
+import { cardMetrics } from "../src/tool-metrics.ts";
 import { toolMarkup, faqs } from "./tool-markup.ts";
 import { detailMarkup } from "../src/html.ts";
 import rawCategories from "../data/categories.json" with { type: "json" };
@@ -76,6 +77,19 @@ test("价格表能从巡检登记表渲染出该厂商的按量价格", () => {
     }
     const source = pricingSource(item.api.pricingSourceId);
     assert.ok(source?.url?.startsWith("https://"), `${item.id} 的价格来源不是 https 链接`);
+  }
+});
+
+test("API 卡片显示接入端点与计费方式，不显示 npm 下载量与仓库更新", () => {
+  // 🔴 API 服务没有 npm 包也没有 GitHub 仓库 ——
+  //   卡片上写「近30天下载 / 仓库更新」只会得到两行「暂未接入」，
+  //   对「按量调接口」的用户毫无意义。判据锁住这个分流。
+  for (const item of apiEntries) {
+    const metrics = cardMetrics(item);
+    assert.ok(metrics.includes("接入端点"), `${item.id} 卡片缺接入端点`);
+    assert.ok(metrics.includes("计费方式"), `${item.id} 卡片缺计费方式`);
+    assert.ok(!metrics.includes("近30天下载"), `${item.id} 卡片不该显示 npm 下载量`);
+    assert.ok(!metrics.includes("仓库更新"), `${item.id} 卡片不该显示仓库更新`);
   }
 });
 

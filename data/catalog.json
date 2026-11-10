@@ -1236,5 +1236,105 @@
       "sdk": "官方 SDK：Python / JavaScript / Go / Java；也可用任意 HTTP 客户端直连",
       "pricingSourceId": "google"
     }
+  },
+  {
+    "id": "anthropic-api",
+    "name": "Claude API",
+    "vendor": "Anthropic",
+    "category": "api",
+    "repo": null,
+    "description": "Anthropic 官方按量 API：直接调用 Claude 模型，走 Messages 接口，不依赖 CLI 或订阅额度。",
+    "install": null,
+    "docs": "https://docs.anthropic.com/en/api/getting-started",
+    "icon": "anthropic.png",
+    "maintainerType": "vendor",
+    "api": {
+      "endpoint": "https://api.anthropic.com",
+      "protocol": "REST（Messages API：POST /v1/messages）",
+      "auth": "API Key",
+      "pricing": "按 token 计费，无月费",
+      "sdk": "官方 SDK：Python / TypeScript / Java / Go / C#；也可用任意 HTTP 客户端直连",
+      "pricingSourceId": "anthropic"
+    }
+  },
+  {
+    "id": "openai-api",
+    "name": "OpenAI API",
+    "vendor": "OpenAI",
+    "category": "api",
+    "repo": null,
+    "description": "OpenAI 官方按量 API：直接调用 GPT 与 o 系列模型，不依赖 CLI 或订阅额度。",
+    "install": null,
+    "docs": "https://platform.openai.com/docs/api-reference",
+    "icon": "openai.png",
+    "maintainerType": "vendor",
+    "api": {
+      "endpoint": "https://api.openai.com/v1",
+      "protocol": "REST",
+      "auth": "API Key（支持项目级 key）",
+      "pricing": "按 token 计费，无月费",
+      "sdk": "官方 SDK：Python / JavaScript / .NET / Java / Go；也可用任意 HTTP 客户端直连",
+      "pricingSourceId": "openai"
+    }
+  },
+  {
+    "id": "xai-api",
+    "name": "xAI API",
+    "vendor": "xAI",
+    "category": "api",
+    "repo": null,
+    "description": "xAI 官方按量 API：直接调用 Grok 模型，接口与 OpenAI 兼容，换 base_url 即可。",
+    "install": null,
+    "docs": "https://docs.x.ai/docs/api-reference",
+    "icon": "xai.png",
+    "maintainerType": "vendor",
+    "api": {
+      "endpoint": "https://api.x.ai/v1",
+      "protocol": "REST（OpenAI 兼容：base_url 指向 api.x.ai/v1）",
+      "auth": "API Key",
+      "pricing": "按 token 计费，无月费",
+      "sdk": "直接用 OpenAI SDK（把 base_url 换成 xAI 的地址即可）",
+      "pricingSourceId": "spacexai"
+    }
+  },
+  {
+    "id": "deepseek-api",
+    "name": "DeepSeek API",
+    "vendor": "DeepSeek",
+    "category": "api",
+    "repo": null,
+    "description": "DeepSeek 官方按量 API：OpenAI 与 Anthropic 两种兼容格式，换 base_url 就能接进现有代码。",
+    "install": null,
+    "docs": "https://api-docs.deepseek.com/zh-cn/",
+    "icon": "deepseek.png",
+    "maintainerType": "vendor",
+    "api": {
+      "endpoint": "https://api.deepseek.com",
+      "protocol": "REST（OpenAI 兼容；另提供 Anthropic 兼容地址 /anthropic）",
+      "auth": "API Key",
+      "pricing": "按 token 计费，无月费",
+      "sdk": "OpenAI SDK 与 Anthropic SDK 都可直接用",
+      "pricingSourceId": "deepseek"
+    }
+  },
+  {
+    "id": "minimax-api",
+    "name": "MiniMax API",
+    "vendor": "MiniMax",
+    "category": "api",
+    "repo": null,
+    "description": "MiniMax 官方按量 API：直接调用 MiniMax 模型，Chat Completions 与 OpenAI 兼容。",
+    "install": null,
+    "docs": "https://platform.minimax.io/docs/api-reference/text-openai-api",
+    "icon": "minimax.png",
+    "maintainerType": "vendor",
+    "api": {
+      "endpoint": "https://api.minimax.chat/v1",
+      "protocol": "REST（OpenAI 兼容 Chat Completions）",
+      "auth": "API Key",
+      "pricing": "按 token 计费，无月费",
+      "sdk": "直接用 OpenAI SDK（把 base_url 换成 MiniMax 的地址即可）",
+      "pricingSourceId": "minimax"
+    }
   }
 ]

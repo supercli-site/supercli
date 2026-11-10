@@ -192,6 +192,11 @@
     "facet": null,
     "reel-kit": null,
     "claude-usage-statusline": null,
-    "gemini-api": null
+    "gemini-api": null,
+    "anthropic-api": null,
+    "openai-api": null,
+    "xai-api": null,
+    "deepseek-api": null,
+    "minimax-api": null
   }
 }
