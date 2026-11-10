@@ -479,5 +479,17 @@
   "API 服务": "API services",
   "回到目录": "Back to the directory",
   "价格与计费规则以官方定价页为准；本页只记录核实过的快照，不代替结算账单。": "Prices and billing rules follow the official pricing page; this page records a verified snapshot and does not replace your invoice.",
-  "本站未收录该 API 的接入信息，请以官方文档为准。": "No connection details are listed for this API; follow the official documentation."
+  "本站未收录该 API 的接入信息，请以官方文档为准。": "No connection details are listed for this API; follow the official documentation.",
+  "按量价格": "Pay-as-you-go pricing",
+  "输入": "Input",
+  "输出": "Output",
+  "缓存读取": "Cache read",
+  "单价": "Price",
+  "单位": "Unit",
+  "官方来源与核实日期": "Official source and verification date",
+  "核实日期": "Verified",
+  "本表价格来自官方定价页的巡检快照": "Prices in this table come from a verified snapshot of the official pricing page",
+  "暂无按量价格快照": "No pay-as-you-go price snapshot yet",
+  "每百万 tokens": "per 1M tokens",
+  "说明": "Note"
 }

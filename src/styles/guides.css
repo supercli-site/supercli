@@ -95,6 +95,37 @@
   font-size: 13px;
   line-height: 1.6;
 }
+/* 按量价格表：价格来自官方定价巡检登记表，方向词（输入/输出/缓存）跟在模型名后面。 */
+.pricing-table {
+  width: 100%;
+  margin: 12px 0 0;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.pricing-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  padding: 0 12px 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.pricing-table td {
+  padding: 9px 12px 9px 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: baseline;
+}
+.pricing-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+/* 方向词是次要信息：与模型名之间留出间距，并压低对比度。 */
+.pricing-direction {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 11px;
+  color: var(--muted);
+}
 .tool-aside-actions {
   display: flex;
   flex-wrap: wrap;

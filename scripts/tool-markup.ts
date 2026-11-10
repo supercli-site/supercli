@@ -12,6 +12,7 @@ import { ambientGridMarkup } from "../src/ambient.ts";
 import { commandMarkup } from "../src/command-markup.ts";
 import { translate, type Language } from "../src/translations.ts";
 import { apiEntryFor } from "../src/api-entry.ts";
+import { pricingTableMarkup } from "../src/pricing-markup.ts";
 import { guides, guideText } from "./guide-content.ts";
 const descriptions: Readonly<Record<string, string>> = english;
 const categoryNames: Readonly<Record<string, string>> = categories;
@@ -94,9 +95,13 @@ function apiMarkup(item: ReviewSubject, language: Language): string {
     [copy(language, "计费方式", "Pricing"), api.pricing],
   ];
   if (api.sdk) rows.push([copy(language, "SDK", "SDK"), api.sdk]);
+  // 🔴 价格表来自官方定价巡检登记表（单源），不在目录条目里写死数字。
+  const priceTable = api.pricingSourceId
+    ? `<h3 class="tool-facts-title">${copy(language, "按量价格", "Pay-as-you-go pricing")}</h3>${pricingTableMarkup(api.pricingSourceId, language)}`
+    : "";
   return `<dl class="tool-facts">${rows
     .map(([term, value]) => `<div><dt>${escape(term)}</dt><dd>${escape(value)}</dd></div>`)
-    .join("")}</dl>${api.priceNote ? `<p class="tool-install-note">${escape(api.priceNote)}</p>` : ""}<p class="tool-install-note">${copy(language, "价格与计费规则以官方定价页为准；本页只记录核实过的快照，不代替结算账单。", "Prices and billing rules follow the official pricing page; this page records a verified snapshot and does not replace your invoice.")}</p>`;
+    .join("")}</dl>${priceTable}<p class="tool-install-note">${copy(language, "价格与计费规则以官方定价页为准；本页只记录核实过的快照，不代替结算账单。", "Prices and billing rules follow the official pricing page; this page records a verified snapshot and does not replace your invoice.")}</p>`;
 }
 /** 页面可见 FAQ 与 FAQPage 结构化数据共用同一组问答，不各写一份。 */
 export function faqs(

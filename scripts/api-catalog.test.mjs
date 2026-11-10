@@ -9,6 +9,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { catalog } from "../src/catalog.ts";
 import { apiEntryFor } from "../src/api-entry.ts";
+import { priceRows, pricingSource } from "../src/pricing-table.ts";
+import { pricingTableMarkup } from "../src/pricing-markup.ts";
 import { toolMarkup, faqs } from "./tool-markup.ts";
 import { detailMarkup } from "../src/html.ts";
 import rawCategories from "../data/categories.json" with { type: "json" };
@@ -28,8 +30,9 @@ test("schema 允许 api 品类与 api 接入信息对象", () => {
   assert.ok(properties.api, "schema 缺少 api 字段");
   for (const key of ["endpoint", "protocol", "auth", "pricing"])
     assert.ok(properties.api.properties[key], `api 对象缺少 ${key}`);
-  // 🔴 接入信息必须有来源与核实口径的位置 —— 纯 API 面的价格最容易过期
-  assert.ok(properties.api.properties.priceNote, "api 对象缺少 priceNote（价格口径与核实日期）");
+  // 🔴 价格必须指向巡检登记表（唯一真源），不能在目录条目里写死数字
+  assert.ok(properties.api.properties.pricingSourceId, "api 对象缺少 pricingSourceId（价格真源指向）");
+  assert.ok(!properties.api.properties.priceNote, "api 对象不该再有 priceNote（价格数字不得写死在目录里）");
 });
 
 test("每个 API 条目都带接入信息，且端点是 https", () => {
@@ -46,6 +49,33 @@ test("API 条目不伪造 GitHub 指标与下载量（无仓库就是 null）", 
   for (const item of apiEntries) {
     assert.equal(item.repo, null, `${item.id} 不该有仓库`);
     assert.equal(item.install, null, `${item.id} 不该有安装命令`);
+  }
+});
+
+test("目录条目里不写死价格数字（价格只来自巡检登记表）", () => {
+  // 🔴 单源铁律：价格会过期，且各家促销期不同（Gemini 到 2026-12-31 才恢复原价）。
+  //   手写在目录里的数字不会随 `pnpm pricing:check` 更新，迟早和官方页面对不上。
+  for (const item of apiEntries) {
+    const text = JSON.stringify(item.api);
+    assert.ok(
+      !/\$\s?\d/.test(text),
+      `${item.id} 的目录条目里出现了价格数字：${text}`,
+    );
+    assert.ok(item.api.pricingSourceId, `${item.id} 没有指向价格真源`);
+  }
+});
+
+test("价格表能从巡检登记表渲染出该厂商的按量价格", () => {
+  for (const item of apiEntries) {
+    const rows = priceRows(item.api.pricingSourceId);
+    assert.ok(rows.length > 0, `${item.id} 在登记表里查不到按量价格`);
+    for (const row of rows) {
+      assert.ok(Number.isFinite(row.value), `${item.id} 的价格不是有限数值`);
+      assert.ok(row.model.length > 0, `${item.id} 的价格缺模型名`);
+      assert.ok(row.unit.length > 0, `${item.id} 的价格缺单位`);
+    }
+    const source = pricingSource(item.api.pricingSourceId);
+    assert.ok(source?.url?.startsWith("https://"), `${item.id} 的价格来源不是 https 链接`);
   }
 });
 
@@ -87,6 +117,52 @@ test("CLI 条目不受影响：仍然有安装方式", () => {
   const page = toolMarkup(cli, "zh");
   assert.ok(page.includes("安装方式"), "CLI 条目的安装方式区块不见了");
   assert.ok(!page.includes("接入方式"), "CLI 条目不该出现接入方式区块");
+});
+
+test("同一模型同一方向出现多个价格时，每档都必须带说明（否则用户分不清）", () => {
+  // 🔴 实测踩坑：Gemini 3.8 Flash 输入有 0.75（促销）与 1.5（原价）两档，
+  //   没有说明时表里就是两行「输入 0.75 / 输入 1.5」，用户无从判断哪个是哪个。
+  const groups = new Map();
+  for (const item of apiEntries) {
+    for (const row of priceRows(item.api.pricingSourceId)) {
+      const key = `${item.id}|${row.model}|${row.unit}`;
+      const list = groups.get(key) ?? [];
+      list.push(row);
+      groups.set(key, list);
+    }
+  }
+  for (const [key, list] of groups) {
+    if (list.length < 2) continue;
+    for (const row of list) {
+      assert.ok(row.note, `${key} 有多档价格，但这一档没有说明：${row.value}`);
+      assert.ok(row.noteEn, `${key} 有多档价格，但这一档缺英文说明：${row.value}`);
+    }
+  }
+});
+
+test("英文页的价格表不得含中文（来源名是数据，要用登记表自带的英文名）", () => {
+  // 🔴 2026-11-11 实测踩坑：价格表的来源名来自登记表的 label（中文），
+  //   而翻译机制只覆盖代码里的静态片段、不翻译数据 ——
+  //   英文页于是出现「AI Studio 定价页」。修法是登记表自带 labelEn。
+  for (const item of apiEntries) {
+    const table = pricingTableMarkup(item.api.pricingSourceId, "en");
+    const body = table.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+    assert.ok(
+      !/[一-鿿]/.test(body),
+      `${item.id} 的英文价格表混进了中文：${body.slice(0, 200)}`,
+    );
+  }
+});
+
+test("价格表的来源链接是官方 https 链接，且带核实日期", () => {
+  for (const item of apiEntries) {
+    const source = pricingSource(item.api.pricingSourceId);
+    assert.ok(source, `${item.id} 缺价格来源`);
+    assert.ok(source.url.startsWith("https://"), `${item.id} 价格来源不是 https`);
+    assert.ok(source.checkedAt, `${item.id} 价格来源缺核实日期`);
+    // 英文页要能拿到英文来源名
+    assert.ok(source.labelEn, `${item.id} 价格来源缺英文名 labelEn`);
+  }
 });
 
 test("英文页正文不得含中文（沿用既有判据，覆盖 API 新增内容）", () => {

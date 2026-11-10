@@ -108,9 +108,10 @@
             "minLength": 2,
             "maxLength": 120
           },
-          "priceNote": {
+          "pricingSourceId": {
             "type": "string",
-            "maxLength": 200
+            "pattern": "^[a-z0-9-]+$",
+            "description": "指向 data/pricing-sources.json 的厂商 id —— 价格明细从该登记表的巡检快照渲染，目录条目里不写死价格数字。"
           }
         }
       }

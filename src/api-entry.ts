@@ -5,7 +5,13 @@ export interface ApiEntry {
   readonly auth: string;
   readonly pricing: string;
   readonly sdk?: string;
-  readonly priceNote?: string;
+  /**
+   * 指向 data/pricing-sources.json 的厂商 id。
+   *
+   * 🔴 价格数字只从那份巡检登记表渲染（src/pricing-table.ts），
+   *   目录条目里不写死价格 —— 手写的数字不会随巡检更新，迟早对不上。
+   */
+  readonly pricingSourceId?: string;
 }
 
 /**

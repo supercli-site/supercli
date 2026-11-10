@@ -51,6 +51,11 @@
                   "type": "string",
                   "minLength": 1
                 },
+                "labelEn": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "英文页显示的来源名；价格表在中英两页共用，label 是数据不能靠静态片段翻译，所以自带英文版。"
+                },
                 "lang": {
                   "type": "string",
                   "enum": ["zh", "en"]
@@ -88,6 +93,18 @@
                       "model": {
                         "type": "string",
                         "minLength": 1
+                      },
+                      "note": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 60,
+                        "description": "档位说明（促销期 / 时段 / 阈值）；同一模型同一方向出现多个价格时，用户靠它区分。"
+                      },
+                      "noteEn": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 60,
+                        "description": "档位说明的英文版；note 是数据不能靠静态片段翻译，所以自带英文版。"
                       },
                       "value": {
                         "type": "number"

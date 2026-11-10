@@ -5,6 +5,7 @@
     "auth": "API key (issued in Google AI Studio)",
     "pricing": "Pay per token, no monthly fee",
     "sdk": "Official SDKs: Python / JavaScript / Go / Java; any HTTP client works too",
-    "priceNote": "Gemini 3.8 Flash is $0.75 input and $3.75 output per million tokens (promotional price through 2026-12-31, then $1.50 / $7.50) — verified 2026-11-05, source: AI Studio pricing page"
+    "priceNote": "Gemini 3.8 Flash is $0.75 input and $3.75 output per million tokens (promotional price through 2026-12-31, then $1.50 / $7.50) — verified 2026-11-05, source: AI Studio pricing page",
+    "pricingSourceId": "google"
   }
 }
