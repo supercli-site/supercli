@@ -161,3 +161,9 @@ README 门面：首屏用 `public/social-card.png`（暗色主题下不突兀）
 - **维护者关注数是快照不是实时值**：`data/contributors.json` 记录 GitHub 用户 API 抓取的 followers/following/publicRepos，缺失记 null（页面显示「关注数未取到」），绝不用 0 冒充。面板脚注标明来源与抓取日期。
 - **轮播用 transform 而非 scroll**：`scroll-behavior: smooth` 依赖动画帧，后台标签页与不绘制的环境里位移永远不生效；transform 位移立即生效，动画只是表现。悬停、聚焦、页面隐藏都暂停。
 - **横向溢出为零**：轨道宽度受父级约束（grid/flex 项 `min-width: 0`），气泡宽度取轨道宽而非内容宽，否则 flex 内容宽会把整列撑破。390/768/1280/1600 四阶视口均无水平滚动。
+
+## 工程配套事实（2026-11-11）
+
+色系来源：`public/brand/supercli-symbol.svg` 的 `#002FA7`。当前颜色真源实际为 `src/styles/tokens.css` 与 `tokens-dark.css`，base.css 负责基础样式；上文文件位置以本节更正，不改设计方向。
+
+已有 contrast.config.json，新增 `pnpm contrast:check` 可执行入口。agentEyes dev 日志位于 log/；本次没有接入生产错误上报。agentGuard(block) 含 designTokens，提交期串回全局凭据扫描。生成的钩子不提交。

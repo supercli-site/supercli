@@ -19,18 +19,20 @@
     "test:rankings": "tsx --test scripts/rankings.test.mjs",
     "pricing": "node scripts/pricing-sources.mjs",
     "pricing:check": "node scripts/pricing-sources.mjs --check",
-    "pricing:coverage": "node scripts/pricing-sources.mjs --check --upstream"
+    "pricing:coverage": "node scripts/pricing-sources.mjs --check --upstream",
+    "contrast:check": "contrast-guard check"
   },
   "engines": {
     "node": ">=24"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",
+    "frontend-contrast-guard": "https://codeload.github.com/webkubor/frontend-contrast-guard/tar.gz/4a41657f91fd82b0858de2408c8ad3376c4db869",
     "prettier": "^3.9.10",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vite": "^8.3.4",
-    "vite-plugin-agent-eyes": "^0.15.1",
+    "vite-plugin-agent-eyes": "^0.18.0",
     "wrangler": "^4.151.1"
   },
   "dependencies": {

@@ -9,3 +9,6 @@ log/
 
 # workbuddy 本地运行时记忆（不入库）
 .workbuddy-ai/
+
+# Generated machine-local hooks
+.githooks/

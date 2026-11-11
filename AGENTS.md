@@ -54,3 +54,7 @@ cat log/<port>/errors.log      # 报错（聚合去重，最新在最上）
 日志每次 dev 启动清空，看到的就是本次。改完 vite 配置要重启 dev 再验。
 完整说明见 `log/README.md` 与 `node_modules/vite-plugin-agent-eyes/AGENT_GUIDE.md`。
 <!-- agent-eyes:end -->
+
+## UI 配套
+
+改 UI 前先读 DESIGN.md 并执行 `cs skill show ui-design`。tokens 在 `src/styles/tokens.css` 和 `tokens-dark.css`；`pnpm contrast:check` 检查既有配置。agentGuard(block) 含 designTokens，pre-commit 串回全局凭据扫描。local hooksPath 指向主检出 `.git/hooks` 绝对路径，由 dev 启动安装钩子。

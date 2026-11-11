@@ -176,6 +176,9 @@ importers:
       '@types/node':
         specifier: ^24.19.2
         version: 24.19.2
+      frontend-contrast-guard:
+        specifier: https://codeload.github.com/webkubor/frontend-contrast-guard/tar.gz/4a41657f91fd82b0858de2408c8ad3376c4db869
+        version: https://codeload.github.com/webkubor/frontend-contrast-guard/tar.gz/4a41657f91fd82b0858de2408c8ad3376c4db869
       prettier:
         specifier: ^3.9.10
         version: 3.9.10
@@ -189,8 +192,8 @@ importers:
         specifier: ^8.3.4
         version: 8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(tsx@4.23.15)
       vite-plugin-agent-eyes:
-        specifier: ^0.15.1
-        version: 0.15.1(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(tsx@4.23.15))
+        specifier: ^0.18.0
+        version: 0.18.0(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(tsx@4.23.15))
       wrangler:
         specifier: ^4.151.1
         version: 4.151.1(@types/node@24.19.2)
@@ -853,6 +856,12 @@ packages:
       picomatch:
         optional: true
 
+  frontend-contrast-guard@https://codeload.github.com/webkubor/frontend-contrast-guard/tar.gz/4a41657f91fd82b0858de2408c8ad3376c4db869:
+    resolution: {gitHosted: true, integrity: sha512-pjc3TRmEbP5ltFPeHg7FJSI63QE0wHvdqCSaR+KkQje6Vum/zzb4zO9atWLM/Gxb7aNUcFg8OCM/RpfrdOjiBw==, tarball: https://codeload.github.com/webkubor/frontend-contrast-guard/tar.gz/4a41657f91fd82b0858de2408c8ad3376c4db869}
+    version: 0.4.0
+    engines: {node: '>=18'}
+    hasBin: true
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -1031,8 +1040,8 @@ packages:
   unenv@2.0.0-rc.24:
     resolution: {integrity: sha512-i7qRCmY42zmCwnYlh9H2SvLEypEFGye5iRmEMKjcGi7zk9UquigRjFtTLz0TYqr0ZGLZhaMHl/foy1bZR+Cwlw==}
 
-  vite-plugin-agent-eyes@0.15.1:
-    resolution: {integrity: sha512-+dwL2ezC3szfzdfT7mc/pUkOX2dl21JCZtArMqzPtRY/FfJdbv0Q49YGN9GqpSV84vLV9zopQqTEKdwdzR89lg==}
+  vite-plugin-agent-eyes@0.18.0:
+    resolution: {integrity: sha512-wawJYk4QPNYQmZeQVeagU/aKjbJV8iQT7+YdTb3xtaCLmlxN7WTNaGZaS+/oVHWacfBBpUOVf357G30tR4aeqQ==}
     engines: {node: '>=20.19'}
     peerDependencies:
       vite: '>=4 <10'
@@ -1533,6 +1542,8 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.7
 
+  frontend-contrast-guard@https://codeload.github.com/webkubor/frontend-contrast-guard/tar.gz/4a41657f91fd82b0858de2408c8ad3376c4db869: {}
+
   fsevents@2.3.3:
     optional: true
 
@@ -1729,7 +1740,7 @@ snapshots:
     dependencies:
       pathe: 2.0.3
 
-  vite-plugin-agent-eyes@0.15.1(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(tsx@4.23.15)):
+  vite-plugin-agent-eyes@0.18.0(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(tsx@4.23.15)):
     dependencies:
       vite: 8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(tsx@4.23.15)
       ws: 8.22.0
