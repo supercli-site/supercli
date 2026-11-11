@@ -150,7 +150,7 @@ README 门面：首屏用 `public/social-card.png`（暗色主题下不突兀）
 - **目录形态**：3 列等宽卡片 → 行式密集排行索引。一行 = 名次｜图标｜名称+来源｜一行描述｜指标｜操作；行高 90px，前三名次品牌蓝。可比密度 ×4。
 - **首屏形态**：编辑式两栏。左：主张（唯一品牌色落在「人工收录」「可能」两处实义上）+ 双 CTA；右：真命令台（目录同源检索、命令分词高亮、就地复制、直达详情）。
 - **数据诚实**：不展示任何无来源的“活跃度”。推荐位只取目录内真实条目；推荐官评语墙删除（recommendedBy 全为 null）。
-- **色**：Klein Blue #002FA7 单色回归；绿/粉 accent 系统移除。明暗两套语义令牌由 contrast-guard 各自门禁（24 对 ×2 = 48 组全过）。
+- **色**：Klein Blue #002FA7 单色回归；绿/粉 accent 系统移除。明暗两套语义令牌由 ui-craft 各自门禁（24 对 ×2 = 48 组全过）。
 - **CSS 架构**：tokens.css / tokens-dark.css 为唯一色源；一个选择器一个主人；断点写在组件文件内。卡片标记单一来源（static-card.ts 构建期 / directory-row.ts 运行时，类结构契约一致）。
 - **动效**：仅 4 组一次性进场（hero-copy、console、dialog、card-append 翻页追加）；零无限循环；reduced-motion 全关。
 

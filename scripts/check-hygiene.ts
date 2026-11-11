@@ -8,7 +8,7 @@
  *     这类 :root[data-theme=dark] 规则没有「引用方」，靠引用扫描查不出来，
  *     所以改成断言「规则必须存在于构建产物中」。
  *  3. 终端/页面令牌在产物中仍各自成对：contrast.config.json 删了令牌名时
- *     contrast-guard 会静默跳过（假绿），这里从产物侧再数一遍兜底。
+ *     ui-craft 会静默跳过（假绿），这里从产物侧再数一遍兜底。
  */
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
