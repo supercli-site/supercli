@@ -1,3 +1,4 @@
+import { trackPageView } from './analytics'
 /**
  * 主题切换：默认跟随系统，手动选择后写入 localStorage 并覆盖系统偏好。
  * 首屏防闪烁由各页面 <head> 的内联脚本负责，这里只管交互与持久化。
@@ -70,6 +71,7 @@ function mount(): void {
 }
 
 export function setupTheme(): void {
+  trackPageView();
   mount();
   apply(stored());
   // 未手动选择时跟随系统变化。
