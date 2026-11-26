@@ -20,7 +20,7 @@
       },
       "evidence": {
         "type": "string",
-        "pattern": "^https://github\\.com/webkubor/supercli/issues/[1-9]\\d*$"
+        "pattern": "^https://github\\.com/(webkubor/supercli|supercli-site/supercli)/issues/[1-9]\\d*$"
       }
     }
   }

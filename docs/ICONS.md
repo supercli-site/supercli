@@ -5,6 +5,7 @@
 | 资产 | 来源 |
 | --- | --- |
 | cloudflare.png | [来源](https://github.com/cloudflare) |
+| citrolabs.png | [来源](https://github.com/citrolabs) |
 | tencentcloud.png | [来源](https://github.com/TencentCloud) |
 | aliyun.png | [来源](https://github.com/aliyun) |
 | aws.png | [来源](https://github.com/aws) |
