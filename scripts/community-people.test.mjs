@@ -31,7 +31,9 @@ test("recommendation quotes bind to real issues and consenting curators", () => 
     assert.equal(record.recommendedBy, pick.curator);
     assert.equal(record.evidence, pick.evidence);
     assert(
-      pick.evidence.includes("github.com/webkubor/supercli/issues/"),
+      /^https:\/\/github\.com\/(?:webkubor\/supercli|supercli-site\/supercli)\/issues\/[1-9]\d*$/.test(
+        pick.evidence,
+      ),
       "评语出处必须指向本站 Issue",
     );
   }

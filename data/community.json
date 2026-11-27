@@ -262,8 +262,8 @@
     "id": "ego",
     "addedAt": "2026-10-20T18:04:16+08:00",
     "curatedBy": "webkubor",
-    "recommendedBy": null,
-    "evidence": "https://github.com/webkubor/supercli/commit/3c4e05a9b27baf899eff3ceb49efe58487cdcc38"
+    "recommendedBy": "webkubor",
+    "evidence": "https://github.com/supercli-site/supercli/issues/15"
   },
   {
     "id": "agent-reach",

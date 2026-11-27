@@ -4,10 +4,13 @@ export function validateCommunity(records, catalog) {
   assert(Array.isArray(records), "收录记录必须是数组");
   const keys = ["id", "addedAt", "curatedBy", "recommendedBy", "evidence"];
   const username = /^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,37}[a-zA-Z0-9])?$/;
-  const commit =
-    /^https:\/\/github\.com\/webkubor\/supercli\/commit\/[a-f0-9]{40}$/;
-  const submission =
-    /^https:\/\/github\.com\/webkubor\/supercli\/(issues|pull)\/[1-9]\d*$/;
+  const repository = "(?:webkubor/supercli|supercli-site/supercli)";
+  const commit = new RegExp(
+    `^https://github\\.com/${repository}/commit/[a-f0-9]{40}$`,
+  );
+  const submission = new RegExp(
+    `^https://github\\.com/${repository}/(issues|pull)/[1-9]\\d*$`,
+  );
   for (const row of records) {
     assert(row && typeof row === "object", "无效收录记录");
     assert.deepEqual(Object.keys(row).sort(), [...keys].sort(), "收录字段不符");

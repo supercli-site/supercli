@@ -16,5 +16,11 @@
     "curator": "museav",
     "quote": "利用 Claude Code 原生 statusLine 钩子驱动，单文件 Python 实现，零外部依赖；清晰区分按量付费与订阅制模式，能精准防止在长上下文重度任务中突发超限中断。",
     "evidence": "https://github.com/webkubor/supercli/issues/7"
+  },
+  {
+    "id": "ego",
+    "curator": "webkubor",
+    "quote": "它让终端 Agent 能使用本机浏览器执行网页任务，并把自动化放进独立的 task Space；适合需要登录态网页操作、又想从 Codex 等终端 Agent 发起浏览器自动化的场景。",
+    "evidence": "https://github.com/supercli-site/supercli/issues/15"
   }
 ]

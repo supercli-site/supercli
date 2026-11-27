@@ -22,7 +22,7 @@ export function validateRecommendations(picks, community, catalog) {
     );
     assert(
       typeof pick.evidence === "string" &&
-        /^https:\/\/github\.com\/webkubor\/supercli\/issues\/[1-9]\d*$/.test(
+        /^https:\/\/github\.com\/(?:webkubor\/supercli|supercli-site\/supercli)\/issues\/[1-9]\d*$/.test(
           pick.evidence,
         ),
       "推荐语出处必须是本站 Issue",
