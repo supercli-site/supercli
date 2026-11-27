@@ -18,16 +18,7 @@
       content="#0b0d12"
       media="(prefers-color-scheme: dark)"
     />
-    <script>
-      // 在首次绘制前落定主题，避免浅色闪一下再变深。
-      (() => {
-        try {
-          const saved = localStorage.getItem("supercli-theme");
-          if (saved === "light" || saved === "dark")
-            document.documentElement.dataset.theme = saved;
-        } catch {}
-      })();
-    </script>
+    <script src="/theme-init.js"></script>
     <link rel="icon" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
