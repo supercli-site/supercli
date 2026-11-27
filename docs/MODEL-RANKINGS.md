@@ -1,37 +1,32 @@
-# Agent 模型排行
+# 端侧小模型排行
 
 页面：`/models`、`/en/models`。首页导航与首屏都有入口，窄屏表格可横向滚动。
 
-## 本站公开接口
+## 数据真源
 
-```http
-GET /api/models/rankings/agent?page=1&page_size=50
-```
+`data/edge-models.json` 是排行榜唯一数据真源，`data/edge-models.schema.json` 是结构契约，校验入口是 `scripts/validation.mjs` 的 `validateEdgeModels`，在 `pnpm build` / `node scripts/validate.mjs` 中执行。
 
-- `page`、`page_size` 都是 1–100 的整数，默认分别为 1、50。拒绝其他查询字段及非 GET 方法。
-- 固定转发 `https://modelgo-web-api.modelgo.ai/api/v1/model-discovery/rankings`，`type=AGENT&metric=AGENTIC_INDEX`。
-- 保留上游 JSON envelope、排序、指标、空值及 `data.snapshot_date`；不自行评分、不编造缺值。
-- 浏览器只请求本站接口；转发不携带调用方的 Origin、Cookie、Authorization 或其他请求头，也不透传上游 Set-Cookie。
-- 上游失败、超时或响应格式错误时返回 502 + `no-store`；成功响应提供 `max-age=60, s-maxage=300` 缓存指令。
-- 上游每日快照不等于实时评测。页面显示实际快照日期，不把请求日期当成数据日期。
-- 计费单位遵从上游：`USD_PER_TASK` 展示美元/任务，其他单位保留原样；缺少数据展示 `—`。
+收录口径：开源、可端侧部署、参数量不超过 1.7B 的小模型；不含闭源大模型与云端 API 模型。每条记录绑定 Hugging Face 仓库来源、快照日期、可部署体积口径与许可标签。
 
-## 部署与本地验证
+## 指标口径
 
-Cloudflare Pages 根目录的 `functions/api/models/rankings/agent.ts` 是唯一转发实现。`pnpm dev` 通过 Vite 插件调用同一个处理器，不另外维护一套代理规则。`public/_routes.json` 将 Function 调用限制在这个 API，其他页面保持静态。
+- **可部署体积**：取仓库内最小可运行权重的实际字节数，来自 Hugging Face tree API 实测。GGUF 取最小 4/5bit 主文件，MLC 取全部 `params_shard` 之和，Core ML 取最小完整模型目录，CTranslate2 取 `model.bin`。多文件模型按核心权重计，不含 tokenizer/配置文件。
+- **下载量**：Hugging Face 仓库累计下载量，快照日期见页面 `snapshot_date`。下载量反映关注度，不代表安装量或质量。
+- **许可**：按仓库 tags 的 `license` 字段原样记录，未标注即显示「未标注」；MIT/Apache-2.0 显示为可直接商用，其他许可显示为需自行核对。
+- **排序**：默认按可部署体积升序（小者优先），可切换按下载量降序。不自行评分。
+
+缺值一律显示 `—`，不写 0。
+
+## 本地验证
 
 ```sh
-pnpm test:rankings
-pnpm build
-pnpm exec wrangler pages functions build --outdir /tmp/supercli-functions-build
+node scripts/validate.mjs   # 数据契约 + 语义校验
+pnpm build                  # 类型、数据、测试与静态产物门禁
+pnpm dev                    # 本地预览 http://127.0.0.1:5179/models
 ```
 
-数据来源及原始榜单：<https://modelgo.ai/models/rankings/agent>。
+页面为纯静态：浏览器只读取随构建输出的本地 JSON，不请求任何外部排行接口，也没有 Cloudflare Function 转发。`public/_routes.json` 不再 include 任何 API 路径。
 
-## 官方价格来源
+## 数据更新
 
-页面的成本列整体来自上游快照，本站不自行计价。为了让读者能自行核对上游数字：
-
-- 厂商名旁的「官方价」「官方套餐」链接，指向 `data/pricing-sources.json` 登记的官方定价页（仅登记已实测可达的来源）。
-- 登记表的结构契约为 `data/pricing-sources.schema.json`，校验入口 `scripts/validation.mjs`，巡检命令 `pnpm pricing:check`。
-- 口径说明：单任务成本按厂商**按量 API 计价**统计，订阅制套餐（如 MiniMax M Plan）另计。详见 [PRICING-SOURCES.md](PRICING-SOURCES.md)。
+更新榜单时修改 `data/edge-models.json`，并同步更新 `snapshot_date` 与每条记录的 `downloads`（从 Hugging Face 仓库 API 实测）。新增模型必须带真实 `source` 链接与体积口径说明，缺来源或缺口径会被门禁拦下。

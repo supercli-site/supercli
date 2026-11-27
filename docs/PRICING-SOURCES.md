@@ -4,16 +4,15 @@
 
 ## 为什么要有这张表
 
-`/models` 页的成本列整体转发自 ModelGo 公开接口（见 [MODEL-RANKINGS.md](MODEL-RANKINGS.md)），本站不持有任何价格数据，也就**无从核对上游数字**。上游单价过时、缺失或沿用了别家的计价规则时，页面不会自己报警。
+CLI 目录里的 API 条目价格不是写在目录里的，而是由 `pricingSourceId` 指向本表的厂商，价格表从本表渲染。本表让每个价格都能追溯：每条价格绑定官方 URL、核对时间与原文摘录，不凭印象填写。
 
-这张表就是核对依据：每条价格都绑定官方 URL、核对时间与原文摘录；上游口径与官方口径不一致时，可以逐条比对。
+模型榜（`MODEL-RANKINGS.md`）已改为开源端侧小模型排行榜，不展示成本列，也不消费本表。
 
 ## 结构
 
 | 字段 | 含义 |
 | --- | --- |
 | `vendors[].id` / `name` | 厂商标识与名称，`id` 全局唯一 |
-| `vendors[].upstreamCreators` | 该厂商在 ModelGo 榜单里的 `creator_name`，用于对齐上游行 |
 | `vendors[].note` | 该厂商的口径说明（促销价、批处理折扣、部署区域差异等） |
 | `sources[].kind` | `api_pricing` 按量定价 / `subscription_plan` 订阅套餐 / `model_doc` 模型价格文档 |
 | `sources[].url` | 官方地址，必须 https |
@@ -33,12 +32,9 @@
 pnpm pricing                                  # 校验本地登记表并打印摘要
 pnpm pricing:check                            # 联网巡检：可达性 + 已记录价格是否仍在页面上
 node scripts/pricing-sources.mjs --check --write   # 巡检后回写核对时间与内容指纹
-pnpm pricing:coverage                            # 额外核对上游榜单里的厂商是否都登记了来源
 ```
 
 顺序固定：先校验本地数据，再联网，最后才写盘（与 `pnpm sync` 系列一致）。构建门禁 `pnpm check` 也会校验本表的结构，但**不联网**。
-
-`pnpm pricing:coverage` 会拉 ModelGo 榜单（与 `functions/api/models/rankings/agent.ts` 同源），列出**榜上有、但没登记官方价格来源的厂商**——上游新增厂商时能第一时间发现该补哪一家。
 
 ## 新增一条厂商
 
@@ -98,7 +94,5 @@ MiniMax 官方口径：
 - 官方价格表只有「缓存读取」一项，**没有缓存写入计价**。
 - 官方价格表里已无 `MiniMax-M2.7`。
 - M Plan 订阅档位：Go ¥49/月（4,489 积分）、Explore ¥119/月（22,460 积分）、Build ¥469/月（74,900 积分）；优先服务按标准价 1.5 倍计费。
-
-ModelGo 上游对 MiniMax 的口径与官方不一致，待上游修正：M3 与 M2.7 的单价完全相同，且带了一个官方没有的缓存写入价（0.375 美元/百万 tokens）；已不在官方价格表中的 M2.7 仍在榜；官方已发布的 M3.1-Flash 未收录。
 
 其余已核对的差异见各厂商 `note` 字段（例如 OpenAI/Google 的促销价与到期时间、Alibaba 的区域部署差异）。

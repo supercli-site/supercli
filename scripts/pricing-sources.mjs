@@ -4,7 +4,6 @@
  *   node scripts/pricing-sources.mjs            校验本地登记表并打印摘要
  *   node scripts/pricing-sources.mjs --check    联网巡检：可达性与已记录价格是否仍在页面上
  *   node scripts/pricing-sources.mjs --check --write   巡检后回写核对时间与内容指纹
- *   node scripts/pricing-sources.mjs --check --upstream  额外核对上游榜单里的厂商是否都登记了来源
  *
  * 顺序固定：先验证本地数据，再联网，最后才写盘。
  */
@@ -21,11 +20,6 @@ const args = new Set(process.argv.slice(2));
 const shouldCheck = args.has("--check");
 const shouldWrite = args.has("--write");
 const strict = args.has("--strict");
-const withUpstream = args.has("--upstream");
-
-/** 与 functions/api/models/rankings/agent.ts 同源的上游榜单接口。 */
-const UPSTREAM =
-  "https://modelgo-web-api.modelgo.ai/api/v1/model-discovery/rankings";
 
 async function fetchSource(source) {
   const controller = new AbortController();
@@ -128,35 +122,6 @@ if (shouldWrite) {
   writeFileSync(PATH, `${JSON.stringify(registry, null, 2)}\n`);
 }
 
-/** 拉上游榜单，核对榜上厂商是否都登记了官方价格来源。 */
-async function upstreamCoverage() {
-  const creators = new Map();
-  for (const page of [1, 2]) {
-    const url = `${UPSTREAM}?type=AGENT&metric=AGENTIC_INDEX&page=${page}&page_size=100`;
-    const response = await fetch(url, { signal: AbortSignal.timeout(20_000) });
-    if (!response.ok) throw new Error(`上游返回 ${response.status}`);
-    const payload = await response.json();
-    for (const item of payload?.data?.items ?? []) {
-      const creator = item.creator_name;
-      if (!creator) continue;
-      creators.set(creator, (creators.get(creator) ?? 0) + 1);
-    }
-  }
-  const covered = new Set(
-    registry.vendors.flatMap((vendor) => vendor.upstreamCreators ?? [vendor.name]),
-  );
-  const missing = [...creators.entries()]
-    .filter(([creator]) => !covered.has(creator))
-    .sort((a, b) => b[1] - a[1]);
-  console.log(
-    `\n上游榜单 ${creators.size} 家厂商，已登记 ${creators.size - missing.length} 家${
-      missing.length ? `；未登记 ${missing.length} 家：` : "；全部已登记"
-    }`,
-  );
-  for (const [creator, count] of missing) console.log(`  未登记：${creator}（${count} 个模型）`);
-  return missing.length;
-}
-
 const width = Math.max(...rows.map((row) => row.url.length), 10);
 for (const row of rows) {
   const state = row.state ? `[${row.state}]` : "";
@@ -174,14 +139,4 @@ console.log(
   }`,
 );
 
-let missingVendors = 0;
-if (withUpstream) {
-  try {
-    missingVendors = await upstreamCoverage();
-  } catch (error) {
-    console.log(`\n上游覆盖核对失败：${error.message}`);
-    if (strict) process.exit(1);
-  }
-}
-
-if (unreachable > 0 || (strict && (drift > 0 || missingVendors > 0))) process.exit(1);
+if (unreachable > 0 || (strict && drift > 0)) process.exit(1);

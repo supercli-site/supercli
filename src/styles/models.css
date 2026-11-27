@@ -175,6 +175,28 @@
   .models-body *, .models-body *::before, .models-body *::after { transition: none !important; }
 }
 
+/* 端侧小模型榜：筛选控件 + 新列 + 备注行。 */
+.models-filters { gap: 14px; padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap; }
+.models-field { display: flex; flex-direction: column; gap: 6px; font-size: 10px; color: var(--muted); min-width: 132px; flex: 1 1 132px; }
+.models-field input, .models-field select {
+  width: 100%; min-height: 38px; padding: 0 10px; font: inherit; font-size: 12px;
+  color: var(--text); background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+}
+.models-field input:focus-visible, .models-field select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.models-check { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); align-self: end; min-height: 38px; }
+.models-check input { width: 16px; height: 16px; accent-color: var(--accent); }
+.model-table .model-title a { color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+.model-table .model-title a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.model-table .model-title svg { width: 12px; height: 12px; }
+.model-size strong { display: block; font-size: 13px; }
+.model-size-basis { display: block; margin-top: 4px; color: var(--muted); font-size: 9px; line-height: 1.4; max-width: 180px; }
+.model-downloads { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.model-lang { font-size: 10px; white-space: nowrap; }
+.model-badge-warn { color: #b45309; border-color: #d97706; background: #fffbeb; }
+:root[data-theme="dark"] .model-badge-warn { color: #fbbf24; border-color: #b45309; background: #3b2a08; }
+.model-note-row td { color: var(--muted); font-size: 11px; line-height: 1.6; padding-top: 0 !important; }
+.model-table tbody tr.model-note-row:hover td { background: transparent; }
+
 :root[data-theme="dark"] .models-body {
   --accent: #7d9dff;
   --accent-hover: #9ab3ff;

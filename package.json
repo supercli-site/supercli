@@ -16,10 +16,8 @@
     "test": "tsx --test scripts/*.test.mjs",
     "typecheck": "tsc --noEmit",
     "sync:usage": "node scripts/sync-usage.mjs",
-    "test:rankings": "tsx --test scripts/rankings.test.mjs",
     "pricing": "node scripts/pricing-sources.mjs",
-    "pricing:check": "node scripts/pricing-sources.mjs --check",
-    "pricing:coverage": "node scripts/pricing-sources.mjs --check --upstream"
+    "pricing:check": "node scripts/pricing-sources.mjs --check"
   },
   "engines": {
     "node": ">=24"

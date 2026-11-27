@@ -5,6 +5,7 @@ import { validateGuides } from "./guide-validation.ts";
 import {
   validateApiPricingReferences,
   validateCatalog,
+  validateEdgeModels,
   validateMetrics,
   validatePricingSourcesRegistry,
 } from "./validation.mjs";
@@ -35,6 +36,7 @@ validateMetrics(snapshot, catalog);
 validateUsage(read("data/usage.json"), catalog);
 validatePricingSourcesRegistry(read("data/pricing-sources.json"));
 validateApiPricingReferences(catalog, read("data/pricing-sources.json"));
+validateEdgeModels(read("data/edge-models.json"));
 for (const item of catalog)
   assert(existsSync(`public/icons/${item.icon}`), `缺少 ${item.icon} 图标`);
 // 头像本地化：每个署名者的头像文件必须真实存在，缺图直接拦构建。
@@ -46,5 +48,5 @@ for (const [login, profile] of Object.entries(read("data/contributors.json").use
   );
 }
 console.log(
-  `Validated ${catalog.length} CLI entries, icons and repository snapshots.`,
+  `Validated ${catalog.length} CLI entries, ${read("data/edge-models.json").models.length} edge models, icons and repository snapshots.`,
 );

@@ -16,6 +16,7 @@ const catalogSchema = ajv.compile(schema("catalog"));
 const metricsSchema = ajv.compile(schema("metrics"));
 const recommendationsSchema = ajv.compile(schema("recommendations"));
 const contributorsSchema = ajv.compile(schema("contributors"));
+const edgeModelsSchema = ajv.compile(schema("edge-models"));
 export function validatePricingSourcesRegistry(registry) {
   validatePricingSources(registry);
 }
@@ -42,6 +43,22 @@ export function validateContributorSchema(snapshot) {
     contributorsSchema(snapshot),
     JSON.stringify(contributorsSchema.errors),
   );
+}
+/** 端侧小模型快照结构由 schema 把关；语义：来源域名、唯一 id 与体积/下载量不得伪造。 */
+export function validateEdgeModels(snapshot) {
+  assert(edgeModelsSchema(snapshot), JSON.stringify(edgeModelsSchema.errors));
+  const ids = snapshot.models.map((model) => model.id);
+  assert.equal(new Set(ids).size, ids.length, "端侧模型 id 重复");
+  for (const model of snapshot.models) {
+    assert(
+      model.source.startsWith("https://huggingface.co/"),
+      `${model.id} 来源不是 Hugging Face`,
+    );
+    assert(
+      model.deploy_mb > 0 && Number.isFinite(model.deploy_mb),
+      `${model.id} 体积不合法`,
+    );
+  }
 }
 export function validateMetrics(snapshot, catalog) {
   assert(metricsSchema(snapshot), JSON.stringify(metricsSchema.errors));

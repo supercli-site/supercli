@@ -1,10 +1,9 @@
 /** 构建与本地遥测配置；路由：/，数据来自仓库快照。 */
 import { localizedPages } from "./scripts/localized-plugin.ts";
-import { rankingsDevApi } from "./scripts/rankings-dev-plugin.ts";
 import { defineConfig } from "vite";
 import { agentEyes } from "vite-plugin-agent-eyes";
 export default defineConfig({
-  plugins: [...agentEyes(), rankingsDevApi(), localizedPages()],
+  plugins: [...agentEyes(), localizedPages()],
   build: {
     rollupOptions: {
       input: {

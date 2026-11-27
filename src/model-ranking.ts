@@ -1,169 +1,189 @@
-/** Agent rankings: render the public snapshot via SuperCLI's same-origin proxy. */
+/** 开源端侧小模型排行榜：本地快照 + 前端筛选排序，不依赖外部接口。 */
 import "./style.css";
 import "./styles/models.css";
 import { setupLanguage, language, t } from "./i18n";
 import { setupTheme } from "./theme";
 import { escapeHtml as escape } from "./escape";
 import { setupScrollProgress } from "./scroll-progress";
-import { createIcons, GitFork, ChevronLeft, ChevronRight, RefreshCw, ArrowUpRight } from "lucide";
-import { modelIcon, providerIcon } from "./model-icons";
-import pricingSources from "../data/pricing-sources.json" with { type: "json" };
+import { createIcons, GitFork, ArrowUpRight, Search } from "lucide";
+import snapshot from "../data/edge-models.json" with { type: "json" };
 
-interface RankingRow {
-  rank: number;
-  model_name: string;
-  creator_name: string | null;
-  value: number | null;
-  cost_value: number | null;
-  cost_unit: string | null;
-  output_tps: number | null;
-  release_date: string | null;
-  is_open_source: boolean | null;
+interface EdgeModel {
+  id: string;
+  name: string;
+  creator: string;
+  task: string;
+  task_en: string;
+  params: string;
+  format: string;
+  format_en: string;
+  license: string;
+  deploy_mb: number;
+  size_basis: string;
+  downloads: number;
+  languages: string[];
+  source: string;
+  note: string;
+  note_en: string;
 }
-interface RankingsSnapshot {
+type SortKey = "size" | "downloads";
+
+const data = snapshot as {
   snapshot_date: string;
-  total: number;
-  page: number;
-  page_size: number;
-  items: RankingRow[];
-}
-/** 厂商 → 官方定价源；登记表是本站唯一的官方价格来源真源。 */
-interface PricingSource {
-  kind: string;
-  url: string;
-  label?: string;
-  primary?: boolean;
-  rendered?: boolean;
-}
-const registry = pricingSources as {
-  vendors: {
-    id: string;
-    name: string;
-    upstreamCreators?: string[];
-    sources: PricingSource[];
-  }[];
+  methodology: Record<string, string>;
+  models: EdgeModel[];
 };
-const pricingLinks = new Map<string, { kind: string; url: string }[]>();
-for (const vendor of registry.vendors) {
-  const creators = vendor.upstreamCreators?.length ? vendor.upstreamCreators : [vendor.name];
-  const links = vendor.sources
-    .filter((source) => source.primary)
-    .map((source) => ({ kind: source.kind, url: source.url }));
-  for (const creator of creators) pricingLinks.set(creator, links);
-}
+const models = data.models;
 const root = document.querySelector<HTMLElement>("#model-ranking")!;
 const statusEl = document.querySelector<HTMLElement>("#ranking-status")!;
-const previous = document.querySelector<HTMLButtonElement>("#models-previous")!;
-const next = document.querySelector<HTMLButtonElement>("#models-next")!;
-const retry = document.querySelector<HTMLButtonElement>("#models-retry")!;
-const pageLabel = document.querySelector<HTMLElement>("#models-page")!;
-const pageSize = 50;
-let page = 1;
-let total = 0;
-let loading = false;
+const search = document.querySelector<HTMLInputElement>("#models-search")!;
+const taskFilter = document.querySelector<HTMLSelectElement>("#models-task")!;
+const licenseFilter = document.querySelector<HTMLSelectElement>("#models-license")!;
+const sortSelect = document.querySelector<HTMLSelectElement>("#models-sort")!;
+const cnOnly = document.querySelector<HTMLInputElement>("#models-cn-only")!;
 
-function number(value: number | null | undefined, digits = 1): string {
-  return typeof value === "number" && Number.isFinite(value) ? value.toFixed(digits) : "—";
+let keyword = "";
+let task = "all";
+let license = "all";
+let sort: SortKey = "size";
+let chineseOnly = false;
+
+function fmtSize(mb: number): string {
+  if (mb >= 1024) return `${(mb / 1024).toFixed(2)} GB`;
+  return `${mb.toFixed(mb < 10 ? 1 : 0)} MB`;
 }
-function costMarkup(row: RankingRow): string {
-  if (row.cost_value == null) return "—";
-  if (row.cost_unit === "USD_PER_TASK")
-    return row.cost_value > 0 && row.cost_value < 0.005 ? "&lt;$0.01" : `$${number(row.cost_value, 2)}`;
-  return `${number(row.cost_value, 2)} ${escape(row.cost_unit ?? "")}`;
+function fmtDownloads(value: number): string {
+  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
+  if (value >= 1_000) return `${(value / 1_000).toFixed(0)}K`;
+  return String(value);
 }
-function logoMarkup(row: RankingRow): string {
-  const icon = modelIcon(row.model_name, row.creator_name);
-  return icon
-    ? `<span class="model-logo"><img src="${icon}" alt="" width="28" height="28" loading="lazy"></span>`
-    : `<span class="model-logo model-logo-fallback" aria-hidden="true">${escape((row.model_name || "?").slice(0, 1))}</span>`;
+function taskLabel(model: EdgeModel): string {
+  return language === "en" ? model.task_en : model.task;
 }
-function vendorMarkup(row: RankingRow): string {
-  const icon = providerIcon(row.creator_name);
-  const links = row.creator_name ? (pricingLinks.get(row.creator_name) ?? []) : [];
-  const official = links
-    .map(
-      (link) =>
-        `<a class="model-official-price" href="${escape(link.url)}" target="_blank" rel="noopener noreferrer">${escape(t(link.kind === "subscription_plan" ? "官方套餐" : "官方价"))}</a>`,
-    )
-    .join("");
-  return `<span class="model-vendor">${icon ? `<span class="model-provider-icon"><img src="${icon}" alt="" width="14" height="14" loading="lazy"></span>` : ""}${escape(row.creator_name ?? t("未知厂商"))}${official}</span>`;
+function formatLabel(model: EdgeModel): string {
+  return language === "en" ? model.format_en : model.format;
 }
-function rowMarkup(row: RankingRow): string {
-  const score = typeof row.value === "number" && Number.isFinite(row.value) ? Math.min(100, Math.max(0, row.value)) : null;
+function noteText(model: EdgeModel): string {
+  return language === "en" ? model.note_en : model.note;
+}
+function licenseBadge(licenseName: string): string {
+  const commercial = /^(mit|apache-2\.0)$/i.test(licenseName);
+  const cls = commercial ? "model-badge" : "model-badge model-badge-warn";
+  return `<span class="${cls}">${escape(licenseName)}</span>`;
+}
+function rowMarkup(model: EdgeModel, rank: number): string {
+  const languages = model.languages.length
+    ? model.languages.map((code) => escape(code.toUpperCase())).join(" · ")
+    : "—";
   return `<tr>
-    <td class="model-rank">${escape(String(row.rank).padStart(2, "0"))}</td>
-    <th scope="row" class="model-name"><div class="model-identity">${logoMarkup(row)}<div><span class="model-title">${escape(row.model_name ?? "")}</span>${vendorMarkup(row)}</div></div></th>
-    <td class="model-score"><strong>${number(row.value)}</strong>${score == null ? "" : `<span class="model-score-track" aria-hidden="true"><span style="width:${score}%"></span></span>`}</td>
-    <td class="model-cost">${costMarkup(row)}</td>
-    <td class="model-tps">${number(row.output_tps)}</td>
-    <td class="model-release">${escape(row.release_date ?? "—")}</td>
-    <td>${row.is_open_source ? `<span class="model-badge">${t("开放权重")}</span>` : ""}</td>
-  </tr>`;
+    <td class="model-rank">${escape(String(rank).padStart(2, "0"))}</td>
+    <th scope="row" class="model-name">
+      <div class="model-identity">
+        <span class="model-logo model-logo-fallback" aria-hidden="true">${escape(model.name.slice(0, 1))}</span>
+        <div>
+          <span class="model-title"><a href="${escape(model.source)}" target="_blank" rel="noopener noreferrer">${escape(model.name)}<i data-lucide="arrow-up-right" aria-hidden="true"></i></a></span>
+          <span class="model-vendor">${escape(model.creator)} · ${escape(model.params)}</span>
+        </div>
+      </div>
+    </th>
+    <td class="model-task">${escape(taskLabel(model))}</td>
+    <td class="model-format">${escape(formatLabel(model))}</td>
+    <td class="model-size"><strong>${fmtSize(model.deploy_mb)}</strong><span class="model-size-basis">${escape(model.size_basis)}</span></td>
+    <td class="model-downloads">${fmtDownloads(model.downloads)}</td>
+    <td class="model-lang">${languages}</td>
+    <td class="model-license">${licenseBadge(model.license)}</td>
+  </tr>
+  <tr class="model-note-row"><td colspan="8">${escape(noteText(model))}</td></tr>`;
 }
-function renderLeader(row: RankingRow): void {
+function render(): void {
+  const filtered = models.filter((model) => {
+    if (chineseOnly && !model.languages.includes("zh") && !model.languages.includes("yue")) return false;
+    if (task !== "all" && taskLabel(model) !== task) return false;
+    if (license !== "all" && model.license !== license) return false;
+    if (!keyword) return true;
+    const haystack = `${model.name} ${model.creator} ${model.format} ${noteText(model)}`.toLowerCase();
+    return haystack.includes(keyword);
+  });
+  filtered.sort((a, b) =>
+    sort === "size" ? a.deploy_mb - b.deploy_mb : b.downloads - a.downloads,
+  );
+  if (!filtered.length) {
+    root.innerHTML = `<p>${t("没有符合条件的小模型，试试放宽筛选。")}</p>`;
+    statusEl.dataset.kind = "empty";
+    statusEl.textContent = t("没有符合条件的小模型，试试放宽筛选。");
+    return;
+  }
+  const leader = filtered[0];
   document.querySelector("#models-leader-content")!.innerHTML =
-    `<div class="models-leader-heading">${logoMarkup(row)}<div><h2>${escape(row.model_name)}</h2><p>${escape(row.creator_name ?? t("未知厂商"))}</p></div></div>
-    <div class="models-leader-score"><strong>${number(row.value)}</strong><span>Agentic Index</span></div>
-    <div class="models-leader-footer"><span>${t("单任务成本")} <strong>${costMarkup(row)}</strong></span><span>${t("当期排名")} <strong>#${escape(String(row.rank))}</strong></span></div>`;
+    `<div class="models-leader-heading"><span class="model-logo model-logo-fallback" aria-hidden="true">${escape(leader.name.slice(0, 1))}</span><div><h2>${escape(leader.name)}</h2><p>${escape(leader.creator)}</p></div></div>
+    <div class="models-leader-score"><strong>${fmtSize(leader.deploy_mb)}</strong><span>${sort === "size" ? t("最小可部署体积") : t("最高下载量")}</span></div>
+    <div class="models-leader-footer"><span>${t("任务")} <strong>${escape(taskLabel(leader))}</strong></span><span>${t("许可")} <strong>${escape(leader.license)}</strong></span></div>`;
+  root.innerHTML = `<div class="model-table-scroll"><table class="model-table">
+    <caption class="sr-only">${t("开源端侧小模型排行")} · ${escape(data.snapshot_date)}</caption>
+    <thead><tr>
+      <th scope="col">#</th><th scope="col">${t("模型")}</th>
+      <th scope="col">${t("任务")}</th><th scope="col">${t("格式")}</th>
+      <th scope="col">${t("可部署体积")}</th><th scope="col">${t("下载量")}</th>
+      <th scope="col">${t("语言")}</th><th scope="col">${t("许可")}</th>
+    </tr></thead>
+    <tbody>${filtered.map((model, index) => rowMarkup(model, index + 1)).join("")}</tbody>
+  </table></div>`;
+  statusEl.dataset.kind = "ready";
+  statusEl.textContent = language === "en"
+    ? `${filtered.length} of ${models.length} models · Snapshot: ${data.snapshot_date}`
+    : `共 ${models.length} 个模型 · 当前显示 ${filtered.length} 个 · 数据快照：${data.snapshot_date}`;
+  createIcons({ icons: { ArrowUpRight } });
 }
-function tableMarkup(snapshot: RankingsSnapshot): string {
-  return `<div class="model-table-scroll"><table class="model-table">
-    <caption class="sr-only">${t("Agent 模型排行")} · ${escape(snapshot.snapshot_date)}</caption>
-    <thead><tr><th scope="col">#</th><th scope="col">${t("模型")}</th>
-    <th scope="col">${t("Agentic 指数")}</th><th scope="col">${t("单任务成本")}</th>
-    <th scope="col">${t("输出 TPS")}</th><th scope="col">${t("发布")}</th>
-    <th scope="col">${t("标签")}</th></tr></thead>
-    <tbody>${snapshot.items.map(rowMarkup).join("")}</tbody></table></div>`;
-}
-function controls(): void {
-  previous.disabled = loading || page <= 1;
-  next.disabled = loading || page * pageSize >= total;
-  retry.disabled = loading;
-}
-async function loadRankings(targetPage = page): Promise<void> {
-  if (loading) return;
-  loading = true;
-  controls();
-  statusEl.dataset.kind = "loading";
-  statusEl.textContent = t("正在加载模型排行…");
-  root.setAttribute("aria-busy", "true");
-  try {
-    const response = await fetch(`/api/models/rankings/agent?page=${targetPage}&page_size=${pageSize}`, {
-      headers: { Accept: "application/json" }, signal: AbortSignal.timeout(18_000),
-    });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const payload = await response.json();
-    const data: RankingsSnapshot = payload?.data;
-    if (payload?.code !== 0 || !Array.isArray(data?.items) ||
-        !Number.isInteger(data.total) || typeof data.snapshot_date !== "string")
-      throw new Error("Invalid snapshot");
-    page = targetPage;
-    total = data.total;
-    document.querySelector("#models-total")!.textContent = String(data.total);
-    document.querySelector("#models-date")!.textContent = data.snapshot_date;
-    if (targetPage === 1 && data.items[0]) renderLeader(data.items[0]);
-    root.innerHTML = data.items.length ? tableMarkup(data) : `<p>${t("暂无排行数据")}</p>`;
-    pageLabel.textContent = `${page} / ${Math.max(1, Math.ceil(total / pageSize))}`;
-    statusEl.dataset.kind = "ready";
-    statusEl.textContent = language === "en"
-      ? `${total} models · Snapshot: ${data.snapshot_date} · Agentic Index`
-      : `共 ${total} 个模型 · 数据快照：${data.snapshot_date} · Agentic Index`;
-  } catch {
-    const placeholder = document.querySelector(".models-leader-loading");
-    if (placeholder) placeholder.textContent = t("模型排行暂时不可用，请稍后重试。");
-    statusEl.dataset.kind = "error";
-    statusEl.textContent = t("模型排行暂时不可用，请稍后重试。");
-  } finally {
-    loading = false;
-    controls();
-    root.setAttribute("aria-busy", "false");
+function fillOptions(): void {
+  const tasks = [...new Set(models.map((model) => taskLabel(model)))].sort();
+  const licenses = [...new Set(models.map((model) => model.license))].sort();
+  for (const value of tasks) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = value;
+    taskFilter.append(option);
+  }
+  for (const value of licenses) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = value;
+    licenseFilter.append(option);
   }
 }
-previous.addEventListener("click", () => void loadRankings(page - 1));
-next.addEventListener("click", () => void loadRankings(page + 1));
-retry.addEventListener("click", () => void loadRankings());
+search.addEventListener("input", () => {
+  keyword = search.value.trim().toLowerCase();
+  render();
+});
+taskFilter.addEventListener("change", () => {
+  task = taskFilter.value;
+  render();
+});
+licenseFilter.addEventListener("change", () => {
+  license = licenseFilter.value;
+  render();
+});
+sortSelect.addEventListener("change", () => {
+  sort = sortSelect.value === "downloads" ? "downloads" : "size";
+  render();
+});
+cnOnly.addEventListener("change", () => {
+  chineseOnly = cnOnly.checked;
+  render();
+});
+document.querySelector("#models-total")!.textContent = String(models.length);
+document.querySelector("#models-date")!.textContent = data.snapshot_date;
+const methodology = document.querySelector<HTMLElement>("#models-methodology");
+if (methodology) {
+  const key = language === "en" ? "scope" : "scope";
+  methodology.textContent = data.methodology[key];
+}
+const sizeBasisEl = document.querySelector<HTMLElement>("#models-size-basis");
+if (sizeBasisEl) sizeBasisEl.textContent = data.methodology.size_basis;
+const licenseEl = document.querySelector<HTMLElement>("#models-license-note");
+if (licenseEl) licenseEl.textContent = data.methodology.license_note;
+fillOptions();
+render();
 setupTheme();
 setupLanguage();
 setupScrollProgress();
-createIcons({ icons: { GitFork, ChevronLeft, ChevronRight, RefreshCw, ArrowUpRight } });
-void loadRankings();
+createIcons({ icons: { GitFork, ArrowUpRight, Search } });
