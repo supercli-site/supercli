@@ -1,6 +1,6 @@
 /** 搜索与 AI 检索的公开目录索引；只导出可核验的公开字段，不包含本机状态。 */
 import { guides } from "./guide-content.ts";
-import catalog from "../data/catalog.json" with { type: "json" };
+import { catalog } from "../src/catalog-source.ts";
 import english from "../data/catalog.en.json" with { type: "json" };
 import metrics from "../data/metrics.json" with { type: "json" };
 import usage from "../data/usage.json" with { type: "json" };

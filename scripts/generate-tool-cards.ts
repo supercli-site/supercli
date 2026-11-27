@@ -1,6 +1,6 @@
 /** 生成每个工具的独立分享卡 PNG（public/og/tools/），需本机 rsvg-convert。 */
 import categories from "../data/categories.json" with { type: "json" };
-import catalog from "../data/catalog.json" with { type: "json" };
+import { catalog } from "../src/catalog-source.ts";
 import metrics from "../data/metrics.json" with { type: "json" };
 import { readFileSync, existsSync, mkdirSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";

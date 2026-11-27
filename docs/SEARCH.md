@@ -4,7 +4,7 @@
 
 ## 当前实现
 
-- `data/catalog.json` 保持收录事实真源；`data/catalog.en.json` 按稳定 ID 提供英文说明。新增工具必须同时补齐英文说明，测试检查完整性。
+- `data/catalog.json` 与 `data/catalog.extra.json` 合起来保持收录事实真源；`data/catalog.en.json` 按稳定 ID 提供英文说明。新增工具必须同时补齐英文说明，测试检查完整性。
 - `data/ui.en.json` 翻译界面静态片段；模板插值不进入翻译过程，继续保留外部信息的 HTML 转义。核验记录保持原文绑定，展示翻译不改变核验结论。
 - 构建输出双语目录、标准、品牌与独立工具页；正文、标题、摘要、canonical、双向 hreflang、JSON-LD 均在静态 HTML 中。目录运行后仍保留真正的工具链接，支持爬取与新标签页打开。
 - 每个工具有 `/tools/<id>/` 和 `/en/tools/<id>/`，X 分享及详情复制使用这些链接。筛选 URL 的 canonical 指向对应语言主页面。

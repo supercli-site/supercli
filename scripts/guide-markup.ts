@@ -1,5 +1,5 @@
 /** 场景页静态正文：按任务比较工具，所有编辑字段及目录字段均转义。 */
-import catalog from "../data/catalog.json" with { type: "json" };
+import { catalog } from "../src/catalog-source.ts";
 import { escapeHtml as escape } from "../src/escape.ts";
 import { guideIconMarkup } from "../src/tool-icon.ts";
 import type { Language } from "../src/translations.ts";

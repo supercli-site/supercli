@@ -1,7 +1,7 @@
 /** CLI 目录查询；路由：/；来源：人工收录清单与本地刷新快照。 */
 import { t } from "./i18n";
 import englishDescriptions from "../data/catalog.en.json";
-import rawCatalog from "../data/catalog.json";
+import { catalog as rawCatalog } from "./catalog-source.ts";
 import rawUsage from "../data/usage.json";
 import rawMetrics from "../data/metrics.json";
 import rawCategories from "../data/categories.json";

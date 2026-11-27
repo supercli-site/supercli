@@ -18,7 +18,16 @@ import {
 } from "./community-people-validation.mjs";
 import { validateUsage } from "./usage-validation.mjs";
 const read = (path) => JSON.parse(readFileSync(path, "utf8"));
-const catalog = read("data/catalog.json");
+// 补充目录在拆分前不存在，缺失时按空目录处理。
+const readOptional = (path) => {
+  try {
+    return JSON.parse(readFileSync(path, "utf8"));
+  } catch (error) {
+    if (error && error.code === "ENOENT") return [];
+    throw error;
+  }
+};
+const catalog = [...read("data/catalog.json"), ...readOptional("data/catalog.extra.json")];
 const snapshot = read("data/metrics.json");
 const community = read("data/community.json");
 const recommendations = read("data/recommendations.json");

@@ -74,7 +74,7 @@ SuperCLI is **manually curated with public evidence**:
 
 **Comfortable with Git** — open a pull request:
 
-1. Fork and edit `data/catalog.json` (the source of truth)
+1. Fork and edit the catalog source of truth: `data/catalog.json` or `data/catalog.extra.json` (together they are the complete directory)
 2. Put the icon under `public/icons/` and record its origin in `docs/ICONS.md`
 3. Add the inclusion record in `data/community.json` and the review record in `data/reviews.json`
 4. Run `pnpm build`, then open a PR explaining the source, purpose, and why it is worth listing

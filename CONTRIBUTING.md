@@ -24,7 +24,7 @@
 
 ## 熟悉 Git：提交 PR
 
-1. Fork 仓库，修改 `data/catalog.json`，填写官方仓库（非 GitHub 填 null）、用途、文档、经核验的安装命令和 `maintainerType`。定义见 [来源标记](docs/SOURCES.md)。上游仓库不能重复。
+1. Fork 仓库，新增/修改收录真源 `data/catalog.json`（前 50 条）或 `data/catalog.extra.json`（后 50 条），按目录顺序放入对应文件，两份合起来才是完整目录；填写官方仓库（非 GitHub 填 null）、用途、文档、经核验的安装命令和 `maintainerType`。定义见 [来源标记](docs/SOURCES.md)。上游仓库不能重复。
 2. 图标放在 `public/icons/`，使用厂商或项目维护者的原资产，并在 `docs/ICONS.md` 标明来源。不要改变品牌几何。
 3. 新条目需要 `data/community.json` 收录记录；PR 创建前可以准备字段，维护者合并前填最终 PR URL、实际收录时间和经确认的署名。不要猜 PR 编号或推荐者，详情见 [社区维护流程](docs/COMMUNITY.md)。
 4. Node 24+、pnpm 12：`pnpm install --frozen-lockfile`；`node scripts/sync.mjs --gh --icons`、`pnpm sync:usage` 刷新快照，再运行 `pnpm build`。只使用可信的官方安装说明，不执行陌生投稿中的脚本。

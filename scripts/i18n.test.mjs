@@ -11,7 +11,18 @@ import {
 import { translate } from "../src/translations.ts";
 const read = (path) =>
   readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
-const catalogData = JSON.parse(read("data/catalog.json"));
+const readOptional = (path) => {
+  try {
+    return JSON.parse(read(path));
+  } catch (error) {
+    if (error && error.code === "ENOENT") return [];
+    throw error;
+  }
+};
+const catalogData = [
+  ...JSON.parse(read("data/catalog.json")),
+  ...readOptional("data/catalog.extra.json"),
+];
 const english = JSON.parse(read("data/catalog.en.json"));
 
 test("every catalog entry has a distinct English description and no orphan translations", () => {

@@ -1,10 +1,11 @@
 /** 维护者手动刷新 npm 下载量；失败不覆盖上一份快照。 */
 import { readFile, writeFile, rename, lstat, unlink } from "node:fs/promises";
+import { readCatalogParts } from "./catalog-source.mjs";
 import { randomUUID } from "node:crypto";
 import assert from "node:assert/strict";
 import { validateCatalog } from "./validation.mjs";
 import { npmPackage, validateUsage } from "./usage-validation.mjs";
-const catalog = JSON.parse(await readFile("data/catalog.json", "utf8"));
+const catalog = await readCatalogParts();
 validateCatalog(catalog);
 assert(!(await lstat("data")).isSymbolicLink(), "data 不能是符号链接");
 async function download(item) {

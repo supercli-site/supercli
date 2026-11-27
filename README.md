@@ -74,7 +74,7 @@ SuperCLI 的做法是**人工收录 + 公开依据**：
 
 **熟悉 Git** — 提 PR：
 
-1. Fork 后修改 `data/catalog.json`（收录真源）
+1. Fork 后修改收录真源 `data/catalog.json` 或 `data/catalog.extra.json`（两份合起来是完整目录）
 2. 图标放入 `public/icons/`，来源登记在 `docs/ICONS.md`
 3. 补 `data/community.json` 收录记录与 `data/reviews.json` 核验记录
 4. 跑 `pnpm build` 后开 PR，说明来源、用途和推荐理由

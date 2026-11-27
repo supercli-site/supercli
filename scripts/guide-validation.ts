@@ -1,6 +1,6 @@
 /** 场景内容构建门禁：拒绝重复路由、缺失翻译、未知工具和非官方来源。 */
 import Ajv from "ajv";
-import catalog from "../data/catalog.json" with { type: "json" };
+import { catalog } from "../src/catalog-source.ts";
 import categories from "../data/categories.json" with { type: "json" };
 import schema from "../data/guides.schema.json" with { type: "json" };
 import type { Guide } from "./guide-content.ts";

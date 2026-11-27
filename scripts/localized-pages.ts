@@ -1,7 +1,7 @@
 /** 双语静态页面与搜索元信息；构建和开发共用，不依赖爬虫执行 JavaScript。 */
 import { guides, guideFor, guideText } from "./guide-content.ts";
 import { guideMarkup, guideStructuredData } from "./guide-markup.ts";
-import catalog from "../data/catalog.json" with { type: "json" };
+import { catalog } from "../src/catalog-source.ts";
 import { toolMarkup, faqs } from "./tool-markup.ts";
 import metrics from "../data/metrics.json" with { type: "json" };
 import english from "../data/catalog.en.json" with { type: "json" };

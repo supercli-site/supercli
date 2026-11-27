@@ -2,7 +2,7 @@
 
 ## 数据与角色
 
-- `data/catalog.json`：工具信息。
+- `data/catalog.json` + `data/catalog.extra.json`：工具信息（两份合起来是完整目录）。
 - `data/community.json`：每个工具一条收录记录，id 对应目录；构建检查覆盖完整性。
 - `data/recommendations.json`：推荐官评语，每条绑定工具、推荐者与原帖 Issue；只收录明确同意公开署名的投稿。
 - `data/contributors.json`：GitHub 用户快照（关注数等），供维护者终端面板展示。

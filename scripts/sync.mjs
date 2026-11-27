@@ -3,8 +3,9 @@ import { readFile, writeFile, rename, access, lstat } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { validateCatalog, validateMetrics } from "./validation.mjs";
+import { readCatalogParts } from "./catalog-source.mjs";
 const execute = promisify(execFile);
-const catalog = JSON.parse(await readFile("data/catalog.json", "utf8"));
+const catalog = await readCatalogParts();
 validateCatalog(catalog);
 /** 任何联网前拒绝图标父目录及目标符号链接，避免校验后越界写盘。 */
 async function validateIconPaths() {
