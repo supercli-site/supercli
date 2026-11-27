@@ -76,8 +76,15 @@
 .terminal-line .term-value {
   display: inline-block;
   animation: term-in 320ms var(--ease) both;
-  animation-delay: calc(var(--i, 0) * 55ms + 120ms);
+  animation-delay: 120ms;
 }
+/* 错峰档位走 class：style 属性（含 --i 自定义属性）会被生产 CSP 的
+   style-src 'self' 拦掉，改成 class 后逐词点亮才真正生效。 */
+.terminal-line .term-i-1 { animation-delay: 175ms; }
+.terminal-line .term-i-2 { animation-delay: 230ms; }
+.terminal-line .term-i-3 { animation-delay: 285ms; }
+.terminal-line .term-i-4 { animation-delay: 340ms; }
+.terminal-line .term-i-5 { animation-delay: 395ms; }
 @keyframes term-in {
   from {
     opacity: 0;

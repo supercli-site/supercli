@@ -343,6 +343,20 @@
 .card-new {
   animation: card-append 320ms var(--ease) backwards;
 }
+/* 入场错峰走 class：style 属性会被生产 CSP 的 style-src 'self' 拦掉，
+   追加卡片会同时弹入、丢掉排队感。档位 0..11，每档 45ms。 */
+.card-enter-0 { animation-delay: 0ms; }
+.card-enter-1 { animation-delay: 45ms; }
+.card-enter-2 { animation-delay: 90ms; }
+.card-enter-3 { animation-delay: 135ms; }
+.card-enter-4 { animation-delay: 180ms; }
+.card-enter-5 { animation-delay: 225ms; }
+.card-enter-6 { animation-delay: 270ms; }
+.card-enter-7 { animation-delay: 315ms; }
+.card-enter-8 { animation-delay: 360ms; }
+.card-enter-9 { animation-delay: 405ms; }
+.card-enter-10 { animation-delay: 450ms; }
+.card-enter-11 { animation-delay: 495ms; }
 @keyframes card-append {
   from {
     opacity: 0;

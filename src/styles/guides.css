@@ -19,21 +19,6 @@
   padding-bottom: 24px;
   border-bottom: 1px solid var(--line);
 }
-/* 网格底纹延伸到左栏之外，覆盖整个工具页顶部，避免形成方形贴纸边界。
-   窄屏下回落为容器宽度，不允许撑出视口。 */
-.tool-aside .ambient-grid {
-  width: 520px;
-  max-width: 100%;
-  right: auto;
-  mask-image: none;
-}
-.tool-aside .ambient-grid::before {
-  mask-image: radial-gradient(
-    ellipse 70% 65% at 22% 35%,
-    #000 15%,
-    transparent 78%
-  );
-}
 /* 主视觉图标：放大到标题级尺寸并加衬底，与品牌标记同规格。 */
 .tool-aside-icon {
   display: inline-flex;

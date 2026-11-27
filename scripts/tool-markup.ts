@@ -8,7 +8,6 @@ import type { CommunityRecord } from "../src/community.ts";
 import { escapeHtml as escape } from "../src/escape.ts";
 import { reviewFor, type ReviewSubject } from "../src/review-data.ts";
 import { guideIconMarkup } from "../src/tool-icon.ts";
-import { ambientGridMarkup } from "../src/ambient.ts";
 import { commandMarkup } from "../src/command-markup.ts";
 import { translate, type Language } from "../src/translations.ts";
 import { apiEntryFor } from "../src/api-entry.ts";
@@ -204,7 +203,7 @@ export function toolMarkup(item: ReviewSubject, language: Language): string {
   return `<nav class="guide-breadcrumb" aria-label="${copy(language, "当前位置", "Breadcrumb")}"><a href="${directory}">SuperCLI</a><span>/</span><span>${escape(translate(item.name, language))}</span></nav>
   <div class="tool-layout">
     <aside class="tool-aside">
-      <div class="tool-aside-head">${ambientGridMarkup(language)}<div class="tool-aside-icon">${guideIconMarkup(item)}</div><p class="eyebrow">${escape(translate(item.vendor, language))} / ${category}</p><h1>${escape(translate(item.name, language))}</h1><p class="intro">${escape(language === "en" ? descriptions[item.id] : item.description)}</p><div class="guide-tags"><span class="guide-tag">${copy(language, item.maintainerType === "vendor" ? "厂商官方" : "社区项目", item.maintainerType === "vendor" ? "Vendor maintained" : "Community maintained")}</span><span class="guide-tag">${escape(category)}</span>${metric ? `<span class="guide-tag guide-tag-metric">${escape(compact(metric.stars))} GitHub Stars</span>` : ""}</div></div>
+      <div class="tool-aside-head"><div class="tool-aside-icon">${guideIconMarkup(item)}</div><p class="eyebrow">${escape(translate(item.vendor, language))} / ${category}</p><h1>${escape(translate(item.name, language))}</h1><p class="intro">${escape(language === "en" ? descriptions[item.id] : item.description)}</p><div class="guide-tags"><span class="guide-tag">${copy(language, item.maintainerType === "vendor" ? "厂商官方" : "社区项目", item.maintainerType === "vendor" ? "Vendor maintained" : "Community maintained")}</span><span class="guide-tag">${escape(category)}</span>${metric ? `<span class="guide-tag guide-tag-metric">${escape(compact(metric.stars))} GitHub Stars</span>` : ""}</div></div>
       <dl class="tool-facts"><div><dt>${copy(language, "分类", "Category")}</dt><dd>${category}</dd></div><div><dt>${copy(language, "维护来源", "Maintenance source")}</dt><dd>${copy(language, item.maintainerType === "vendor" ? "厂商官方" : "社区项目", item.maintainerType === "vendor" ? "Vendor maintained" : "Community maintained")}</dd></div>${metric ? `<div><dt>${copy(language, "GitHub Stars", "GitHub stars")}</dt><dd>${escape(compact(metric.stars))} · ${copy(language, `快照 ${metrics.fetchedAt.slice(0, 10)}`, `snapshot ${metrics.fetchedAt.slice(0, 10)}`)}</dd></div>` : ""}</dl>
       <div class="tool-aside-actions"><a class="button primary" href="${escape(item.docs)}">${copy(language, "官方文档", "Official docs")} ↗</a>${item.repo ? `<a class="button" href="https://github.com/${escape(item.repo)}">${copy(language, "源码仓库", "Source repository")} ↗</a>` : ""}</div>
       <a class="tool-aside-back" href="${directory}">← ${copy(language, "回到目录", "Back to the directory")}</a>

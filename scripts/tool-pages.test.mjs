@@ -212,18 +212,16 @@ test("install commands render as a terminal window with a copyable command", () 
     assert.match(html, /class="terminal-body"/);
     assert.match(html, /class="terminal-prompt">\$</);
     assert.match(html, /class="terminal-caret"/);
-    // 氛围网格是纯装饰，不能进入读屏。
-    assert.match(html, /class="ambient-grid" aria-hidden="true"/);
     // 命令按词分色，不允许把整条命令塞进一个未分色的 code。
-    assert.match(html, /class="term-command"[^>]*>npm</);
-    assert.match(html, /class="term-flag"[^>]*>-g</);
+    assert.match(html, /class="term-command[^"]*"[^>]*>npm</);
+    assert.match(html, /class="term-flag[^"]*"[^>]*>-g</);
     assert.match(html, /data-copy-command="npm install -g wrangler"/);
     assert.match(html, /class="copy terminal-copy"/);
-    // 逐词点亮的错峰序号：每个词都带 --i，供 CSS 计算延迟。
-    const words = html.match(/class="term-\w+" style="--i:(\d+)"/g) ?? [];
+    // 逐词点亮的错峰序号：每个词都带档位 class，供 CSS 取错峰延迟。
+    const words = html.match(/class="term-\w+( term-i-\d+)?"/g) ?? [];
     assert.equal(words.length, 4);
     assert.deepEqual(
-      words.map((word) => Number(word.match(/--i:(\d+)/)[1])),
+      words.map((word) => Number(word.match(/term-i-(\d+)/)?.[1] ?? 0)),
       [0, 1, 2, 3],
     );
     // 复制按钮的可访问名必须转义，工具名来自外部数据。

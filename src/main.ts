@@ -79,6 +79,8 @@ let toastTimer: ReturnType<typeof setTimeout>;
 let currentDetailItem: Entry | null = null;
 /** 目录分页：首屏只渲染一屏能看完的数量，避免手机上滚过上百张卡片。 */
 const PAGE_SIZE = 12;
+/** 追加卡片的入场错峰档位数：一页最多 PAGE_SIZE 张，档位按 45ms 递增。 */
+const CARD_ENTER_TIERS = PAGE_SIZE;
 let visibleCount = PAGE_SIZE;
 /** 入场动画只在首屏播一次，翻页和筛选重渲染不重播。 */
 let hasEntered = false;
@@ -105,13 +107,14 @@ function render(resetPage = true): void {
   root.innerHTML = shown
     .map((item, index) => {
       // 只给本次新增的卡片排队入场，已有卡片原地不动。
-      const delay = from >= 0 && index >= from ? (index - from) * 45 : null;
+      const order = from >= 0 && index >= from ? index - from : null;
       const markup = cardMarkup(item, index, sort.value);
-      if (delay === null) return markup;
-      return markup.replace(
-        'class="card"',
-        `class="card card-new" style="animation-delay:${delay}ms"`,
-      );
+      if (order === null) return markup;
+      // 错峰档位走 class 而不是 style="animation-delay:…"：生产 CSP 是
+      // style-src 'self'，内联样式属性会被浏览器拦掉，追加卡片会同时弹入、
+      // 丢掉排队感。档位有界（一页 12 张），超出回落到最后一档。
+      const tier = order < CARD_ENTER_TIERS ? ` card-enter-${order}` : ` card-enter-${CARD_ENTER_TIERS - 1}`;
+      return markup.replace('class="card"', `class="card card-new${tier}"`);
     })
     .join("");
   const more = document.querySelector<HTMLElement>("#catalog-more")!;
